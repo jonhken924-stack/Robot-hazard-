@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NovaTrade AI | MT5 Trading Dashboard</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #07111f;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* BACKGROUND */
+body::before {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: #00e5ff;
+    opacity: .08;
+    filter: blur(120px);
+    border-radius: 50%;
+    top: -150px;
+    left: -150px;
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: #7c3cff;
+    opacity: .08;
+    filter: blur(120px);
+    border-radius: 50%;
+    right: -150px;
+    bottom: -150px;
+    z-index: -1;
+}
+
+/* HEADER */
+header {
+    width: 100%;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5, 14, 28, .85);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    backdrop-filter: blur(15px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #00e5ff;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #9fb0c8;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    background: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00ff88;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% {
+        opacity: .4;
+        transform: scale(.7);
+    }
+}
+
+/* MAIN */
+.container {
+    width: 92%;
+    max-width: 1400px;
+    margin: 30px auto;
+}
+
+/* HERO */
+.hero {
+    padding: 30px;
+    border-radius: 24px;
+    background: linear-gradient(
+        135deg,
+        rgba(0,229,255,.10),
+        rgba(124,60,255,.10)
+    );
+    border: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 25px;
+    animation: fadeUp .8s ease;
+}
+
+.hero h1 {
+    font-size: clamp(27px, 5vw, 48px);
+    margin-bottom: 10px;
+}
+
+.hero h1 span {
+    color: #00e5ff;
+}
+
+.hero p {
+    color: #9fb0c8;
+    line-height: 1.6;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: rgba(12, 25, 45, .82);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px;
+    padding: 22px;
+    transition: .3s;
+    animation: fadeUp .8s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0,229,255,.35);
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+}
+
+.card small {
+    color: #8ea1ba;
+}
+
+.card h2 {
+    margin-top: 9px;
+    font-size: 27px;
+}
+
+.green {
+    color: #00ff88;
+}
+
+.red {
+    color: #ff5577;
+}
+
+/* DASHBOARD GRID */
+.dashboard {
+    display: grid;
+    grid-template-columns: 1.5fr .8fr;
+    gap: 20px;
+}
+
+/* PANELS */
+.panel {
+    background: rgba(12, 25, 45, .82);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.panel-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.panel-title h3 {
+    font-size: 18px;
+}
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    background: rgba(0,255,136,.12);
+    color: #00ff88;
+}
+
+/* PRICE */
+.price-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #081526;
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 15px;
+}
+
+.symbol {
+    font-weight: bold;
+}
+
+.price {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* CHART */
+.chart {
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    border-radius: 14px;
+}
+
+#chartCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* TRADING FORM */
+label {
+    display: block;
+    color: #8ea1ba;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.09);
+    background: #071321;
+    color: white;
+    outline: none;
+    margin-bottom: 14px;
+}
+
+input:focus,
+select:focus {
+    border-color: #00e5ff;
+}
+
+.trade-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.buy {
+    background: linear-gradient(135deg,#00c875,#00ff88);
+    color: #03130b;
+}
+
+.sell {
+    background: linear-gradient(135deg,#ff385d,#ff5577);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+/* ROBOT */
+.robot-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #071321;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.switch {
+    width: 52px;
+    height: 28px;
+    background: #334155;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+.switch::after {
+    content: "";
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    border-radius: 50%;
+    background: white;
+    transition: .3s;
+}
+
+.switch.active {
+    background: #00c875;
+}
+
+.switch.active::after {
+    left: 26px;
+}
+
+/* POSITIONS */
+.position {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 12px;
+    background: #071321;
+    margin-bottom: 9px;
+}
+
+.position small {
+    color: #8295ae;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* MT5 */
+.mt5-status {
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(0,255,136,.08);
+    border: 1px solid rgba(0,255,136,.18);
+    color: #00ff88;
+    margin-bottom: 15px;
+}
+
+.connect {
+    width: 100%;
+    background: linear-gradient(135deg,#0077ff,#00c6ff);
+}
+
+/* NOTIFICATION */
+#notification {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: #10233c;
+    border: 1px solid rgba(255,255,255,.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    transform: translateY(120px);
+    opacity: 0;
+    transition: .4s;
+    z-index: 999;
+}
+
+#notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #657991;
+    font-size: 12px;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE */
+@media(max-width: 950px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 550px) {
+    header {
+        padding: 15px;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    .cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card h2 {
+        font-size: 20px;
+    }
+
+    .hero {
+        padding: 22px;
+    }
+
+    .position {
+        grid-template-columns: 1fr 1fr 1fr;
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        Nova<span>Trade</span> AI
+    </div>
+
+    <div class="status">
+        <div class="status-dot"></div>
+        Demo Server Online
+    </div>
+</header>
+
+<div class="container">
+
+    <section class="hero">
+        <h1>AI <span>Trading Dashboard</span></h1>
+        <p>
+            Monitor markets, manage positions and control your automated
+            trading strategy from one modern dashboard.
+        </p>
+    </section>
+
+    <!-- ACCOUNT CARDS -->
+    <section class="cards">
+
+        <div class="card">
+            <small>Account Balance</small>
+            <h2 id="balance">$10,000.00</h2>
+        </div>
+
+        <div class="card">
+            <small>Today's Profit</small>
+            <h2 class="green" id="profit">+$248.50</h2>
+        </div>
+
+        <div class="card">
+            <small>Open Positions</small>
+            <h2 id="positionsCount">2</h2>
+        </div>
+
+        <div class="card">
+            <small>Win Rate</small>
+            <h2 class="green">78.4%</h2>
+        </div>
+
+    </section>
+
+    <div class="dashboard">
+
+        <!-- LEFT -->
+        <div>
+
+            <!-- MARKET -->
+            <div class="panel">
+
+                <div class="panel-title">
+                    <h3>Market Overview</h3>
+                    <span class="badge">LIVE DEMO</span>
+                </div>
+
+                <div class="price-box">
+                    <div>
+                        <div class="symbol">BTC/USD</div>
+                        <small>Bitcoin</small>
+                    </div>
+
+                    <div style="text-align:right">
+                        <div class="price" id="btcPrice">$67,420.25</div>
+                        <small class="green" id="btcChange">+1.42%</small>
+                    </div>
+                </div>
+
+                <div class="chart">
+                    <canvas id="chartCanvas"></canvas>
+                </div>
+
+            </div>
+
+            <!-- POSITIONS -->
+            <div class="panel">
+
+                <div class="panel-title">
+                    <h3>Open Positions</h3>
+                    <span class="badge">2 ACTIVE</span>
+                </div>
+
+                <div id="positions">
+
+                    <div class="position">
+                        <div>
+                            <small>Symbol</small>
+                            BTC/USD
+                        </div>
+
+                        <div>
+                            <small>Type</small>
+                            <span class="green">BUY</span>
+                        </div>
+
+                        <div>
+                            <small>P/L</small>
+                            <span class="green">+$84.20</span>
+                        </div>
+                    </div>
+
+                    <div class="position">
+                        <div>
+                            <small>Symbol</small>
+                            EUR/USD
+                        </div>
+
+                        <div>
+                            <small>Type</small>
+                            <span class="red">SELL</span>
+                        </div>
+
+                        <div>
+                            <small>P/L</small>
+                            <span class="green">+$42.80</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div>
+
+            <!-- TRADING -->
+            <div class="panel">
+
+                <div class="panel-title">
+                    <h3>Place Trade</h3>
+                    <span class="badge">DEMO</span>
+                </div>
+
+                <label>Trading Symbol</label>
+
+                <select id="symbol">
+                    <option>BTC/USD</option>
+                    <option>EUR/USD</option>
+                    <option>GBP/USD</option>
+                    <option>USD/JPY</option>
+                    <option>XAU/USD</option>
+                </select>
+
+                <label>Lot Size</label>
+
+                <select id="lot">
+                    <option>0.01</option>
+                    <option>0.05</option>
+                    <option>0.10</option>
+                    <option>0.50</option>
+                    <option>1.00</option>
+                </select>
+
+                <label>Stop Loss</label>
+                <input type="number" id="sl" placeholder="Enter stop loss">
+
+                <label>Take Profit</label>
+                <input type="number" id="tp" placeholder="Enter take profit">
+
+                <div class="trade-buttons">
+
+                    <button class="buy" onclick="placeTrade('BUY')">
+                        BUY
+                    </button>
+
+                    <button class="sell" onclick="placeTrade('SELL')">
+                        SELL
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- ROBOT -->
+            <div class="panel">
+
+                <div class="panel-title">
+                    <h3>Trading Robot</h3>
+                    <span class="badge" id="robotStatus">
+                        OFF
+                    </span>
+                </div>
+
+                <div class="robot-box">
+
+                    <div>
+                        <strong>NovaTrade AI Robot</strong>
+                        <br>
+                        <small style="color:#8295ae">
+                            Automated strategy
+                        </small>
+                    </div>
+
+                    <div
+                        class="switch"
+                        id="robotSwitch"
+                        onclick="toggleRobot()">
+                    </div>
+
+                </div>
+
+                <div id="robotMessage"
+                     style="font-size:12px;color:#8295ae">
+                    Robot is currently disabled.
+                </div>
+
+            </div>
+
+            <!-- MT5 -->
+            <div class="panel">
+
+                <div class="panel-title">
+                    <h3>MetaTrader 5</h3>
+                </div>
+
+                <div class="mt5-status">
+                    ● MT5 Bridge Ready
+                </div>
+
+                <button class="connect" onclick="connectMT5()">
+                    CONNECT TO MT5
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    NovaTrade AI © 2026 — Trading involves financial risk.
+</footer>
+
+<div id="notification"></div>
+
+<script>
+
+/* =========================
+   BTC PRICE SIMULATION
+========================= */
+
+let btcPrice = 67420.25;
+
+function updateBTC() {
+
+    let movement = (Math.random() - 0.5) * 80;
+
+    btcPrice += movement;
+
+    document.getElementById("btcPrice").textContent =
+        "$" + btcPrice.toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+    let percent =
+        ((btcPrice - 67000) / 67000) * 100;
+
+    document.getElementById("btcChange").textContent =
+        (percent >= 0 ? "+" : "") +
+        percent.toFixed(2) + "%";
+
+    drawChart();
+}
+
+setInterval(updateBTC, 2000);
+
+
+/* =========================
+   SIMPLE ANIMATED CHART
+========================= */
+
+const canvas =
+    document.getElementById("chartCanvas");
+
+const ctx = canvas.getContext("2d");
+
+let chartData = [];
+
+for(let i = 0; i < 60; i++) {
+    chartData.push(
+        130 + Math.random() * 70
+    );
+}
+
+function resizeCanvas() {
+
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = canvas.parentElement.clientHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener("resize", resizeCanvas);
+
+function drawChart() {
+
+    if(chartData.length > 70) {
+        chartData.shift();
+    }
+
+    chartData.push(
+        130 + Math.random() * 70
+    );
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.beginPath();
+
+    chartData.forEach((value, index) => {
+
+        let x =
+            index *
+            (canvas.width /
+            (chartData.length - 1));
+
+        let y =
+            canvas.height -
+            value;
+
+        if(index === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+
+    });
+
+    ctx.strokeStyle = "#00e5ff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+}
+
+drawChart();
+
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+function notify(message) {
+
+    const box =
+        document.getElementById("notification");
+
+    box.textContent = message;
+
+    box.classList.add("show");
+
+    setTimeout(() => {
+        box.classList.remove("show");
+    }, 3000);
+
+}
+
+
+/* =========================
+   DEMO TRADE
+========================= */
+
+function placeTrade(type) {
+
+    const symbol =
+        document.getElementById("symbol").value;
+
+    const lot =
+        document.getElementById("lot").value;
+
+    const sl =
+        document.getElementById("sl").value;
+
+    const tp =
+        document.getElementById("tp").value;
+
+    notify(
+        "Demo " +
+        type +
+        " order created: " +
+        symbol +
+        " | Lot " +
+        lot
+    );
+
+    console.log({
+        action: type,
+        symbol: symbol,
+        lot: lot,
+        stopLoss: sl,
+        takeProfit: tp
+    });
+
+}
+
+
+/* =========================
+   ROBOT ON/OFF
+========================= */
+
+let robotOn = false;
+
+function toggleRobot() {
+
+    robotOn = !robotOn;
+
+    const switchButton =
+        document.getElementById("robotSwitch");
+
+    const status =
+        document.getElementById("robotStatus");
+
+    const message =
+        document.getElementById("robotMessage");
+
+    if(robotOn) {
+
+        switchButton.classList.add("active");
+
+        status.textContent = "ON";
+
+        message.textContent =
+            "Robot enabled. Waiting for an approved trading signal...";
+
+        notify("Trading robot enabled.");
+
+    } else {
+
+        switchButton.classList.remove("active");
+
+        status.textContent = "OFF";
+
+        message.textContent =
+            "Robot is currently disabled.";
+
+        notify("Trading robot disabled.");
+
+    }
+
+}
+
+
+/* =========================
+   MT5 CONNECTION DEMO
+========================= */
+
+function connectMT5() {
+
+    notify(
+        "MT5 connection interface is ready. Backend/EA connection is required for real trading."
+    );
+
+}
+
+
+/* =========================
+   PROFIT ANIMATION
+========================= */
+
+let profit = 248.50;
+
+setInterval(() => {
+
+    profit +=
+        (Math.random() - .48) * 2;
+
+    document.getElementById("profit").textContent =
+        (profit >= 0 ? "+" : "") +
+        "$" +
+        profit.toFixed(2);
+
+}, 3000);
+
+</script>
+
+</body>
+</html>
