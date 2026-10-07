@@ -3,110 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA GOLD - ALARM SIGNAL</title>
+<title>NOVA GOLD - 15MIN RUN</title>
 <style>
 *{box-sizing:border-box;margin:0}body{background:#040d19;color:#fff;font-family:Arial;padding:10px}
-.card{background:#10233d;border:1px solid #1d3e62;border-radius:14px;padding:14px;margin-bottom:10px}
-.big{font-size:38px;font-weight:900;text-align:center;padding:24px;border-radius:14px;margin:10px 0;cursor:pointer}
-.buy{background:linear-gradient(90deg,#00b67a,#00ffaa);color:#002a18;animation:flash 0.5s infinite}
-.sell{background:linear-gradient(90deg,#d83a5a,#ff5c7a);color:#fff;animation:flash 0.5s infinite}
+.card{background:#10233d;border:1px solid #1d3e62;border-radius:14px;padding:14px;margin-bottom:10px;text-align:center}
+.big{font-size:30px;font-weight:900;text-align:center;padding:20px;border-radius:14px;margin:10px 0}
+.buySig{background:linear-gradient(90deg,#00b67a,#00ffaa);color:#002a18;animation:flash 0.4s infinite}
+.sellSig{background:linear-gradient(90deg,#d83a5a,#ff5c7a);color:#fff;animation:flash 0.4s infinite}
 .wait{background:#162c44;color:#7d93a8}
-@keyframes flash{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
-.btn{width:100%;padding:18px;border:0;border-radius:12px;font-weight:900;font-size:18px;margin-top:10px}
-.btn-fbs{background:#ffcc00;color:#000}
-.btn-stop{background:#d83a5a;color:#fff;display:none}
-.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a3450;font-size:13px}
-.switch{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
+.run{background:#0a2a4a;color:#00ffaa;border:2px solid #00ffaa}
+.closeSig{background:linear-gradient(90deg,#ffcc00,#ff9900);color:#000;animation:flash 0.3s infinite}
+@keyframes flash{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+.btn{width:100%;padding:18px;border:0;border-radius:14px;font-weight:900;font-size:18px;margin-top:8px;display:none}
+.btn-buy{background:#00ffaa;color:#002a18}
+.btn-sell{background:#ff3b5a;color:#fff}
+.btn-close{background:#ffcc00;color:#000;display:none}
+.btn-mute{background:#222;color:#aaa;font-size:12px;display:block;padding:8px}
+.timer{font-size:42px;font-weight:900;color:#ffcc00;margin:10px 0}
 </style>
 </head>
 <body>
-<div class="card" style="text-align:center">
-<b>NOVA GOLD AI - ALARM</b><br><span style="color:#00ffaa">● FBS-Demo 106742043</span><br>
-<span style="font-size:22px;font-weight:800;color:#ffcc00" id="livePrice">Connecting $4119...</span>
-</div>
-
-<div id="signalBox" class="big wait" onclick="stopAlarm()">🔍 SCANNING<br><span style="font-size:14px">Tap to enable sound</span></div>
-
-<button id="stopBtn" class="btn btn-stop" onclick="stopAlarm()">🔇 STOP ALARM & OPEN FBS</button>
-<button class="btn btn-fbs" onclick="openFBS()">OPEN FBS APP</button>
-
 <div class="card">
-<div class="switch"><span>🔊 Loud Alarm</span><b style="color:#00ffaa" id="alarmState">ON</b></div>
-<div class="switch"><span>📳 Vibration</span><b style="color:#00ffaa">ON</b></div>
-<div class="row"><span>Account</span><b>106742043 Demo $1000</b></div>
-<div class="row"><span>Target</span><b style="color:#00ffaa">+$10/day</b></div>
-<div class="row"><span>Price</span><b id="priceRow">$4119 LIVE</b></div>
+<b>NOVA GOLD - 15MIN RUN</b><br>
+<span style="color:#00ffaa">● FBS 106742043 | M1 entry | 15min close</span><br>
+<span id="livePrice" style="font-size:22px;font-weight:800;color:#ffcc00">$4119 LIVE</span>
 </div>
+
+<div id="signalBox" class="big wait">🔍 SCANNING<br><span style="font-size:12px">15min system - tap to enable sound</span></div>
+
+<div id="timerBox" style="display:none;text-align:center" class="card">
+<div style="font-size:12px;color:#7d93a8">TRADE RUNNING - CLOSE AFTER</div>
+<div id="timer" class="timer">15:00</div>
+<div style="font-size:11px">Auto alarm at 00:00 to close in FBS</div>
+</div>
+
+<button id="buyBtn" class="btn btn-buy" onclick="executeTrade('BUY')">🟢 TAP TO BUY NOW (15MIN)</button>
+<button id="sellBtn" class="btn btn-sell" onclick="executeTrade('SELL')">🔴 TAP TO SELL NOW (15MIN)</button>
+<button id="closeBtn" class="btn btn-close" onclick="closeTrade()">🟡 CLOSE TRADE NOW IN FBS</button>
+<button id="muteBtn" class="btn btn-mute" onclick="muteOnly()">🔇 MUTE</button>
 
 <audio id="alarmAudio" loop preload="auto">
 <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg">
-<source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
 </audio>
 
 <script>
-let price=4119.10, alarmOn=true, alarmPlaying=false, audioCtx=null;
-const alarmEl=document.getElementById('alarmAudio');
+let price=4119, alarmPlaying=false, audioCtx=null, currentSide=null, timerInt=null, secondsLeft=900;
 
-function initAudio(){ if(!audioCtx){ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); } }
-
+function initAudio(){ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }
 async function getLive(){
- try{let r=await fetch('https://api.gold-api.com/price/XAU');let j=await r.json();if(j.price)price=j.price;}catch(e){price+=(Math.random()-0.5)*1.2;}
+ try{let r=await fetch('https://api.gold-api.com/price/XAU');let j=await r.json();if(j.price)price=j.price;}catch(e){price+=(Math.random()-0.5)*0.8;}
  document.getElementById('livePrice').innerText='$'+price.toFixed(2)+' LIVE';
- document.getElementById('priceRow').innerText='$'+price.toFixed(2)+' LIVE';
+}
+function playAlarm(isBuy, isClose=false){
+ initAudio(); alarmPlaying=true;
+ document.getElementById('alarmAudio').currentTime=0;
+ document.getElementById('alarmAudio').play().catch(()=>{});
+ try{let o=audioCtx.createOscillator();let g=audioCtx.createGain();o.type='square';o.frequency.value=isClose?1200:(isBuy?900:400);g.gain.value=0.6;o.connect(g);g.connect(audioCtx.destination);o.start();setTimeout(()=>{try{o.stop()}catch(e){}},800);}catch(e){}
+ if(navigator.vibrate) navigator.vibrate(isClose?[500,100,500,100,500]:[300,100,300]);
 }
 
-function playAlarm(isBuy){
- if(!alarmOn) return;
- initAudio();
- alarmPlaying=true;
- document.getElementById('stopBtn').style.display='block';
- // Try HTML audio
- alarmEl.currentTime=0; alarmEl.play().catch(()=>{});
- // Loud beep via Web Audio
- try{
-   let osc=audioCtx.createOscillator(); let gain=audioCtx.createGain();
-   osc.type='square'; osc.frequency.value=isBuy?880:440;
-   gain.gain.value=0.5; osc.connect(gain); gain.connect(audioCtx.destination);
-   osc.start(); setTimeout(()=>{try{osc.stop()}catch(e){}},600);
- }catch(e){}
- // Vibrate
- if(navigator.vibrate) navigator.vibrate([300,100,300,100,500]);
+function executeTrade(side){
+ currentSide=side; alarmPlaying=false;
+ document.getElementById('alarmAudio').pause();
+ document.getElementById('buyBtn').style.display='none';
+ document.getElementById('sellBtn').style.display='none';
+ // Start 15min timer
+ document.getElementById('timerBox').style.display='block';
+ document.getElementById('signalBox').className='big run';
+ document.getElementById('signalBox').innerHTML='▶️ RUNNING '+side+'<br><span style="font-size:14px">$'+price.toFixed(2)+' for 15min</span>';
+ secondsLeft=900; // 15 * 60
+ clearInterval(timerInt);
+ timerInt=setInterval(()=>{
+   secondsLeft--;
+   let m=Math.floor(secondsLeft/60); let s=secondsLeft%60;
+   document.getElementById('timer').innerText=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+   if(secondsLeft<=0){
+     clearInterval(timerInt);
+     document.getElementById('signalBox').className='big closeSig';
+     document.getElementById('signalBox').innerHTML='⏰ 15MIN OVER<br><span style="font-size:14px">CLOSE '+currentSide+' NOW IN FBS</span>';
+     document.getElementById('closeBtn').style.display='block';
+     playAlarm(true,true);
+     let iv2=setInterval(()=>{ if(document.getElementById('closeBtn').style.display=='none'){clearInterval(iv2);return;} playAlarm(true,true); },2500);
+   }
+ },1000);
+ window.open('https://fbs.com/cabinet','_blank');
 }
 
-function stopAlarm(){
- alarmPlaying=false;
- alarmEl.pause(); alarmEl.currentTime=0;
- document.getElementById('stopBtn').style.display='none';
- if(navigator.vibrate) navigator.vibrate(0);
- openFBS();
+function closeTrade(){
+ clearInterval(timerInt);
+ document.getElementById('closeBtn').style.display='none';
+ document.getElementById('timerBox').style.display='none';
+ document.getElementById('signalBox').className='big wait';
+ document.getElementById('signalBox').innerHTML='🔍 SCANNING<br><span style="font-size:12px">Trade closed - waiting next M1 signal</span>';
+ document.getElementById('alarmAudio').pause(); alarmPlaying=false;
+ window.open('https://fbs.com/cabinet','_blank');
 }
+
+function muteOnly(){ document.getElementById('alarmAudio').pause(); alarmPlaying=false; }
 
 function checkSignal(){
- if(alarmPlaying) return; // don't spam while alarm ringing
- if(Math.random()>0.82){
+ if(alarmPlaying || timerInt) return;
+ if(Math.random()>0.80){
    let isBuy=Math.random()>0.5;
    let box=document.getElementById('signalBox');
-   if(isBuy){
-     box.className='big buy';box.innerHTML='🟢 BUY SIGNAL<br><span style="font-size:18px">XAUUSD @ $'+price.toFixed(2)+'</span><br><span style="font-size:12px">TAP TO STOP ALARM</span>';
-   }else{
-     box.className='big sell';box.innerHTML='🔴 SELL SIGNAL<br><span style="font-size:18px">XAUUSD @ $'+price.toFixed(2)+'</span><br><span style="font-size:12px">TAP TO STOP ALARM</span>';
-   }
+   box.className='big '+(isBuy?'buySig':'sellSig');
+   box.innerHTML=(isBuy?'🟢 BUY SIGNAL':'🔴 SELL SIGNAL')+'<br><span style="font-size:16px">$'+price.toFixed(2)+'</span><br><span style="font-size:10px">15MIN RUN - TAP BELOW</span>';
+   document.getElementById('buyBtn').style.display=isBuy?'block':'none';
+   document.getElementById('sellBtn').style.display=!isBuy?'block':'none';
    playAlarm(isBuy);
-   // Keep alarming every 2 sec until stopped
-   let interval=setInterval(()=>{
-     if(!alarmPlaying){clearInterval(interval);return;}
-     playAlarm(isBuy);
-   },2000);
+   let iv=setInterval(()=>{ if(!alarmPlaying){clearInterval(iv);return;} playAlarm(isBuy); },3000);
  }
 }
-
-function openFBS(){ window.open('https://fbs.com/cabinet','_blank'); }
-
-// Enable audio on first tap
 document.body.addEventListener('click',()=>{initAudio(); if(audioCtx && audioCtx.state==='suspended')audioCtx.resume();},{once:true});
-
-getLive();setInterval(getLive,3000);
-setInterval(checkSignal,4000);
+getLive();setInterval(getLive,3000);setInterval(checkSignal,5000);
 </script>
 </body>
-                                         </html>
+ </html>
