@@ -3,19 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NOVA TRADE - $10 Growth Demo</title>
+<title>NOVA TRADE GOLD AI - Demo</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
-    background:#06111d;
-    color:#fff;
+    background:#050d17;
+    color:#f4f7fb;
     font-family:Arial,sans-serif;
 }
 
@@ -23,35 +19,35 @@ header{
     position:sticky;
     top:0;
     z-index:20;
+    background:#091827;
+    border-bottom:1px solid #23415c;
     padding:16px;
-    background:#091a2b;
-    border-bottom:1px solid #203c55;
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
 
 .logo{
-    font-size:23px;
-    font-weight:bold;
+    font-size:24px;
+    font-weight:800;
 }
 
 .logo span{
-    color:#16e0a0;
+    color:#19dfa1;
 }
 
-.demo{
-    color:#ffc400;
-    background:#302909;
-    border:1px solid #806900;
-    padding:8px 11px;
-    border-radius:20px;
+.badge{
+    background:#342c08;
+    color:#ffd21a;
+    border:1px solid #8d7600;
+    padding:9px 13px;
+    border-radius:22px;
     font-size:11px;
     font-weight:bold;
 }
 
 .container{
-    max-width:1000px;
+    max-width:900px;
     margin:auto;
     padding:14px;
 }
@@ -63,12 +59,12 @@ header{
 }
 
 .card{
-    background:#0b1b2c;
-    border:1px solid #1c3b55;
-    border-radius:17px;
+    background:#0a1929;
+    border:1px solid #1b3b56;
+    border-radius:18px;
     padding:17px;
     margin-bottom:13px;
-    box-shadow:0 8px 25px #0005;
+    box-shadow:0 8px 25px #0006;
 }
 
 .label{
@@ -77,22 +73,14 @@ header{
 }
 
 .value{
-    margin-top:6px;
-    font-size:22px;
+    font-size:23px;
     font-weight:bold;
+    margin-top:7px;
 }
 
-.green{
-    color:#16e0a0;
-}
-
-.red{
-    color:#ff5577;
-}
-
-.yellow{
-    color:#ffc400;
-}
+.green{color:#19dfa1}
+.red{color:#ff5477}
+.yellow{color:#ffd21a}
 
 .market{
     display:flex;
@@ -101,7 +89,7 @@ header{
 }
 
 .symbol{
-    font-size:21px;
+    font-size:22px;
     font-weight:bold;
 }
 
@@ -111,108 +99,129 @@ header{
 }
 
 .chart{
-    height:250px;
-    margin-top:15px;
-    background:#071521;
-    border:1px solid #193752;
-    border-radius:13px;
+    height:280px;
+    margin-top:16px;
+    border:1px solid #1b3b56;
+    border-radius:14px;
     overflow:hidden;
+    background:#06121e;
 }
 
-.chart svg{
+svg{
     width:100%;
     height:100%;
 }
 
 .title{
-    font-size:18px;
+    font-size:19px;
     font-weight:bold;
-    margin-bottom:13px;
+    margin-bottom:14px;
 }
 
 .status{
+    text-align:center;
     padding:12px;
     border-radius:10px;
-    text-align:center;
-    background:#092b25;
-    color:#16e0a0;
-    margin-bottom:12px;
+    background:#092d26;
+    color:#19dfa1;
     font-weight:bold;
+    margin-bottom:12px;
 }
 
-.riskbox{
-    background:#081b2b;
-    border:1px solid #254762;
-    padding:12px;
-    border-radius:11px;
+.target{
+    border:1px solid #725f00;
+    background:#2b2507;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:12px;
 }
 
 .row{
     display:flex;
     justify-content:space-between;
+    gap:10px;
     padding:7px 0;
     font-size:13px;
 }
 
-button{
-    width:100%;
-    border:0;
-    padding:14px;
-    border-radius:10px;
-    color:#fff;
-    font-weight:bold;
-    font-size:14px;
-    cursor:pointer;
-}
-
-.start{
-    background:#08a879;
-}
-
-.stop{
-    background:#d82f54;
-}
-
-.reset{
-    background:#1d354c;
+.progress{
+    height:12px;
+    background:#172a3c;
+    border-radius:20px;
+    overflow:hidden;
     margin-top:10px;
+}
+
+.progressBar{
+    height:100%;
+    width:0%;
+    background:#19dfa1;
+    transition:width .3s;
 }
 
 .buttons{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
-    margin-top:12px;
+}
+
+button{
+    border:0;
+    color:white;
+    padding:14px;
+    border-radius:11px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.start{
+    background:#08a878;
+}
+
+.stop{
+    background:#d72f54;
+}
+
+.reset{
+    width:100%;
+    background:#1b344b;
+    margin-top:10px;
 }
 
 .position{
-    background:#071624;
-    border:1px solid #1c3b54;
+    background:#071522;
+    border:1px solid #1d405a;
     border-radius:12px;
     padding:14px;
 }
 
-.history{
-    padding:10px 0;
-    border-bottom:1px solid #193348;
-    font-size:13px;
-}
-
 .empty{
     text-align:center;
-    color:#6e8498;
+    color:#71879b;
     padding:20px;
+}
+
+.history{
+    padding:11px 0;
+    border-bottom:1px solid #193449;
+    font-size:13px;
 }
 
 .warning{
     display:none;
     margin-top:12px;
     padding:12px;
-    border-radius:9px;
+    border-radius:10px;
     background:#411b25;
-    border:1px solid #a33850;
+    border:1px solid #a53a52;
     color:#ff9aaa;
     font-size:12px;
+}
+
+.notice{
+    color:#8095a9;
+    font-size:11px;
+    line-height:1.5;
 }
 
 #message{
@@ -223,312 +232,160 @@ button{
     transform:translateX(-50%);
     width:90%;
     max-width:400px;
+    background:#173149;
+    border:1px solid #3b617d;
     padding:13px;
     border-radius:10px;
-    background:#173149;
-    border:1px solid #39617d;
     text-align:center;
     z-index:100;
 }
 
 footer{
+    color:#60788d;
     text-align:center;
-    color:#62798e;
-    font-size:11px;
     padding:25px;
+    font-size:11px;
 }
 
 @media(max-width:500px){
-
-    .value{
-        font-size:19px;
-    }
-
-    .price{
-        font-size:20px;
-    }
-
-    .symbol{
-        font-size:18px;
-    }
-
+    .value{font-size:20px}
+    .price{font-size:20px}
+    .symbol{font-size:19px}
 }
-
 </style>
 </head>
 
-
 <body>
 
-
 <header>
-
-<div class="logo">
-NOVA <span>TRADE</span>
-</div>
-
-<div class="demo">
-● $10 DEMO
-</div>
-
+    <div class="logo">NOVA <span>TRADE</span></div>
+    <div class="badge">● XAUUSD DEMO</div>
 </header>
 
-
 <div class="container">
-
 
 <!-- ACCOUNT -->
 
 <div class="grid">
 
-<div class="card">
+    <div class="card">
+        <div class="label">BALANCE</div>
+        <div class="value" id="balance">$10.00</div>
+    </div>
 
-<div class="label">
-BALANCE
-</div>
+    <div class="card">
+        <div class="label">EQUITY</div>
+        <div class="value" id="equity">$10.00</div>
+    </div>
 
-<div
-class="value"
-id="balance">
+    <div class="card">
+        <div class="label">TODAY'S PROFIT</div>
+        <div class="value green" id="profit">$0.00</div>
+    </div>
 
-$10.00
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="label">
-EQUITY
-</div>
-
-<div
-class="value"
-id="equity">
-
-$10.00
+    <div class="card">
+        <div class="label">WIN RATE</div>
+        <div class="value" id="winRate">0%</div>
+    </div>
 
 </div>
 
-</div>
 
+<!-- GOLD MARKET -->
 
 <div class="card">
 
-<div class="label">
-TOTAL PROFIT
+    <div class="market">
+
+        <div>
+            <div class="symbol">🥇 XAU/USD</div>
+            <div class="green" id="trend">GOLD MARKET</div>
+        </div>
+
+        <div style="text-align:right">
+            <div class="price" id="price">$2,650.00</div>
+            <div class="label">SIMULATED PRICE</div>
+        </div>
+
+    </div>
+
+    <div class="chart">
+
+        <svg viewBox="0 0 800 280"
+             preserveAspectRatio="none">
+
+            <defs>
+                <pattern id="grid"
+                         width="50"
+                         height="50"
+                         patternUnits="userSpaceOnUse">
+                    <path d="M50 0L0 0 0 50"
+                          fill="none"
+                          stroke="#173147"/>
+                </pattern>
+            </defs>
+
+            <rect width="800"
+                  height="280"
+                  fill="url(#grid)"/>
+
+            <polyline
+                id="line"
+                fill="none"
+                stroke="#19dfa1"
+                stroke-width="3"
+                points="">
+            </polyline>
+
+        </svg>
+
+    </div>
+
 </div>
 
-<div
-class="value green"
-id="totalProfit">
 
-$0.00
-
-</div>
-
-</div>
-
+<!-- DAILY TARGET -->
 
 <div class="card">
 
-<div class="label">
-WIN RATE
-</div>
-
-<div
-class="value"
-id="winRate">
-
-0%
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- MARKET -->
-
-<div class="card">
-
-<div class="market">
-
-<div>
-
-<div class="symbol">
-₿ BTC/USD
-</div>
-
-<div
-id="trend"
-class="green">
-
-DEMO MARKET
-
-</div>
-
-</div>
-
-
-<div style="text-align:right">
-
-<div
-class="price"
-id="price">
-
-$70,000.00
-
-</div>
-
-<div class="label">
-SIMULATED PRICE
-</div>
-
-</div>
-
-</div>
-
-
-<div class="chart">
-
-<svg
-viewBox="0 0 800 250"
-preserveAspectRatio="none">
-
-<defs>
-
-<pattern
-id="grid"
-width="50"
-height="50"
-patternUnits="userSpaceOnUse">
-
-<path
-d="M50 0L0 0 0 50"
-fill="none"
-stroke="#163047"/>
-
-</pattern>
-
-</defs>
-
-
-<rect
-width="800"
-height="250"
-fill="url(#grid)">
-</rect>
-
-
-<polyline
-id="line"
-fill="none"
-stroke="#16e0a0"
-stroke-width="3"
-points="">
-</polyline>
-
-</svg>
-
-</div>
-
-</div>
-
-
-<!-- RISK MANAGER -->
-
-<div class="card">
-
-<div class="title">
-🛡️ $10 ACCOUNT RISK MANAGER
-</div>
-
-
-<div class="riskbox">
-
-
-<div class="row">
-
-<span>Account</span>
-
-<b id="riskBalance">
-$10.00
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Risk per trade</span>
-
-<b class="yellow">
-2%
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Risk amount</span>
-
-<b id="riskAmount">
-$0.20
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Profit target</span>
-
-<b class="green">
-2.5 × risk
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Maximum daily loss</span>
-
-<b class="red">
-5%
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Daily loss used</span>
-
-<b id="dailyLoss">
-$0.00
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Maximum trades</span>
-
-<b>
-1 at a time
-</b>
-
-</div>
-
-
-</div>
+    <div class="title">🎯 DAILY PROFIT TARGET</div>
+
+    <div class="target">
+
+        <div class="row">
+            <span>Starting balance</span>
+            <b>$10.00</b>
+        </div>
+
+        <div class="row">
+            <span>Today's target</span>
+            <b class="green">+$5.00</b>
+        </div>
+
+        <div class="row">
+            <span>Target balance</span>
+            <b class="yellow">$15.00</b>
+        </div>
+
+        <div class="row">
+            <span>Profit achieved</span>
+            <b id="targetProfit">$0.00</b>
+        </div>
+
+        <div class="progress">
+            <div
+                id="progressBar"
+                class="progressBar">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="notice">
+        The $5 target is a demo objective, not a guaranteed
+        real-market profit target. The robot automatically stops
+        when the target is reached.
+    </div>
 
 </div>
 
@@ -537,55 +394,58 @@ $0.00
 
 <div class="card">
 
-<div class="title">
-🤖 ACCOUNT GROWTH ROBOT
-</div>
+    <div class="title">🤖 GOLD DEMO ROBOT</div>
 
+    <div id="status" class="status">
+        ● ROBOT RUNNING
+    </div>
 
-<div
-id="status"
-class="status">
+    <div class="row">
+        <span>Risk per trade</span>
+        <b class="yellow">3%</b>
+    </div>
 
-● ROBOT RUNNING
+    <div class="row">
+        <span>Risk amount</span>
+        <b id="risk">$0.30</b>
+    </div>
 
-</div>
+    <div class="row">
+        <span>Reward / Risk</span>
+        <b class="green">2.5 : 1</b>
+    </div>
 
+    <div class="row">
+        <span>Daily loss protection</span>
+        <b class="red">$1.00</b>
+    </div>
 
-<div class="buttons">
+    <div class="buttons">
 
-<button
-class="start"
-onclick="startRobot()">
+        <button
+            class="start"
+            onclick="startRobot()">
+            ▶ START ROBOT
+        </button>
 
-▶ START
+        <button
+            class="stop"
+            onclick="stopRobot()">
+            ■ STOP ROBOT
+        </button>
 
-</button>
+    </div>
 
+    <button
+        class="reset"
+        onclick="resetDemo()">
+        RESET $10 DEMO
+    </button>
 
-<button
-class="stop"
-onclick="stopRobot()">
-
-■ STOP
-
-</button>
-
-</div>
-
-
-<button
-class="reset"
-onclick="resetDemo()">
-
-RESET $10 ACCOUNT
-
-</button>
-
-
-<div
-id="warning"
-class="warning">
-</div>
+    <div
+        id="warning"
+        class="warning">
+    </div>
 
 </div>
 
@@ -594,89 +454,42 @@ class="warning">
 
 <div class="card">
 
-<div class="title">
-OPEN POSITION
-</div>
+    <div class="title">OPEN XAUUSD POSITION</div>
 
-
-<div id="position">
-
-<div class="empty">
-Robot is waiting for a trading signal...
-</div>
-
-</div>
+    <div id="position">
+        <div class="empty">
+            Robot is waiting for a gold signal...
+        </div>
+    </div>
 
 </div>
 
 
-<!-- STATISTICS -->
+<!-- PERFORMANCE -->
 
 <div class="card">
 
-<div class="title">
-PERFORMANCE
-</div>
+    <div class="title">📊 PERFORMANCE</div>
 
+    <div class="row">
+        <span>Winning trades</span>
+        <b class="green" id="wins">0</b>
+    </div>
 
-<div class="row">
+    <div class="row">
+        <span>Losing trades</span>
+        <b class="red" id="losses">0</b>
+    </div>
 
-<span>Winning trades</span>
+    <div class="row">
+        <span>Best trade</span>
+        <b class="green" id="best">$0.00</b>
+    </div>
 
-<b
-class="green"
-id="wins">
-
-0
-
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Losing trades</span>
-
-<b
-class="red"
-id="losses">
-
-0
-
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Best trade</span>
-
-<b
-class="green"
-id="best">
-
-$0.00
-
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Worst trade</span>
-
-<b
-class="red"
-id="worst">
-
-$0.00
-
-</b>
-
-</div>
+    <div class="row">
+        <span>Worst trade</span>
+        <b class="red" id="worst">$0.00</b>
+    </div>
 
 </div>
 
@@ -685,67 +498,58 @@ $0.00
 
 <div class="card">
 
-<div class="title">
-TRADE HISTORY
-</div>
+    <div class="title">TRADE HISTORY</div>
 
-
-<div id="history">
-
-<div class="empty">
-No trades yet.
-</div>
+    <div id="history">
+        <div class="empty">
+            No trades yet.
+        </div>
+    </div>
 
 </div>
 
 </div>
-
-
-</div>
-
 
 <footer>
-
-NOVA TRADE • $10 GROWTH DEMO<br>
-SIMULATION ONLY — NO REAL MONEY
-
+    NOVA TRADE • XAUUSD DEMO<br>
+    SIMULATED TRADING — NO REAL MONEY
 </footer>
-
 
 <div id="message"></div>
 
 
 <script>
 
-
-/* =================================
-   ACCOUNT SETTINGS
-================================= */
+/* ==========================
+   SETTINGS
+========================== */
 
 const START_BALANCE = 10;
 
-const RISK_PERCENT = 0.02;
+const TARGET_PROFIT = 5;
 
-const DAILY_LOSS_PERCENT = 0.05;
+const TARGET_BALANCE = 15;
 
-const REWARD_RISK = 2.5;
+const RISK_PERCENT = 0.03;
+
+const DAILY_LOSS_LIMIT = 1;
 
 
-/* =================================
-   ACCOUNT VARIABLES
-================================= */
+/* ==========================
+   VARIABLES
+========================== */
 
 let balance = START_BALANCE;
 
-let price = 70000;
+let price = 2650;
 
-let robotRunning = true;
+let prices = [];
 
 let position = null;
 
-let history = [];
+let robot = true;
 
-let prices = [];
+let profitToday = 0;
 
 let dailyLoss = 0;
 
@@ -753,1019 +557,757 @@ let wins = 0;
 
 let losses = 0;
 
-let totalProfit = 0;
-
 let bestTrade = 0;
 
 let worstTrade = 0;
 
+let history = [];
 
-/* =================================
-   CREATE PRICE HISTORY
-================================= */
 
-for(let i=0;i<70;i++){
+/* ==========================
+   PRICE HISTORY
+========================== */
 
-price +=
-(Math.random()-0.47)*180;
+for(let i=0;i<80;i++){
 
-prices.push(price);
+    price +=
+    (Math.random()-0.47)*5;
 
+    prices.push(price);
 }
 
 
-/* =================================
-   MARKET
-================================= */
+/* ==========================
+   MARKET ENGINE
+========================== */
 
 function updateMarket(){
 
-let movement =
-(Math.random()-0.48)*220;
+    /*
+      More active demo movement
+      so the simulator doesn't sit
+      still for long periods.
+    */
 
+    let movement =
+    (Math.random()-0.47)*7;
 
-price += movement;
+    price += movement;
 
+    if(price < 2580)
+        price = 2580;
 
-if(price < 60000)
-price = 60000;
+    if(price > 2750)
+        price = 2750;
 
+    prices.push(price);
 
-if(price > 85000)
-price = 85000;
+    if(prices.length > 80)
+        prices.shift();
 
+    document.getElementById("price")
+        .innerText =
+        "$" + price.toFixed(2);
 
-prices.push(price);
+    drawChart();
 
+    checkPosition();
 
-if(prices.length > 70){
+    robotDecision();
 
-prices.shift();
-
+    updateDisplay();
 }
 
 
-document.getElementById("price").innerText =
-"$"+price.toLocaleString(
-undefined,
-{
-minimumFractionDigits:2
-}
-);
-
-
-drawChart();
-
-checkPosition();
-
-robotDecision();
-
-updateDisplay();
-
-}
-
-
-/* =================================
+/* ==========================
    CHART
-================================= */
+========================== */
 
 function drawChart(){
 
-let min =
-Math.min(...prices);
+    let min =
+    Math.min(...prices);
 
-let max =
-Math.max(...prices);
+    let max =
+    Math.max(...prices);
 
-let range =
-max-min;
+    let range = max-min;
 
+    if(range === 0)
+        range = 1;
 
-if(range===0)
-range=1;
+    let points = "";
 
+    prices.forEach((p,i)=>{
 
-let points="";
+        let x =
+        (i/(prices.length-1))*800;
 
+        let y =
+        255 -
+        ((p-min)/range)*220;
 
-prices.forEach(
-function(p,i){
+        points +=
+        x + "," + y + " ";
 
-let x =
-(i/(prices.length-1))*800;
+    });
 
-
-let y =
-230-
-((p-min)/range)*200;
-
-
-points +=
-x+","+y+" ";
-
-});
-
-
-document
-.getElementById("line")
-.setAttribute(
-"points",
-points
-);
-
+    document.getElementById("line")
+        .setAttribute("points",points);
 }
 
 
-/* =================================
-   RISK CALCULATION
-================================= */
-
-function getRiskAmount(){
-
-return balance*RISK_PERCENT;
-
-}
-
-
-function getDailyLimit(){
-
-return balance*DAILY_LOSS_PERCENT;
-
-}
-
-
-/* =================================
+/* ==========================
    ROBOT DECISION
-================================= */
+========================== */
 
 function robotDecision(){
 
-if(!robotRunning)
-return;
+    if(!robot)
+        return;
+
+    if(position !== null)
+        return;
+
+    if(profitToday >= TARGET_PROFIT){
+
+        finishTarget();
+
+        return;
+    }
+
+    if(dailyLoss >= DAILY_LOSS_LIMIT){
+
+        stopRobot();
+
+        return;
+    }
 
 
-if(position !== null)
-return;
+    /*
+      Momentum calculation.
+    */
+
+    let recent =
+    prices[prices.length-1];
+
+    let old =
+    prices[prices.length-8];
+
+    let momentum =
+    recent-old;
 
 
-if(dailyLoss >=
-getDailyLimit()){
+    /*
+      Strong upward momentum
+      = BUY
+    */
 
-stopRobot();
+    if(momentum > 9){
 
-return;
+        openTrade("BUY");
 
-}
+    }
 
+    /*
+      Strong downward momentum
+      = SELL
+    */
 
-/*
- Simple momentum strategy.
+    else if(momentum < -9){
 
- This is intentionally a demo strategy,
- not a promise of profit.
-*/
+        openTrade("SELL");
 
-if(prices.length < 10)
-return;
-
-
-let now =
-prices[prices.length-1];
-
-let previous =
-prices[prices.length-7];
-
-
-let momentum =
-now-previous;
-
-
-/*
- Wait for a stronger movement
- before entering.
-*/
-
-if(momentum > 250){
-
-openPosition("BUY");
-
-}
-
-else if(momentum < -250){
-
-openPosition("SELL");
-
-}
-
-}
-
-
-/* =================================
-   OPEN POSITION
-================================= */
-
-function openPosition(type){
-
-if(position !== null)
-return;
-
-
-let risk =
-getRiskAmount();
-
-
-/*
- Demo uses a 1% price stop.
-
- The position size is calculated so
- the maximum planned loss equals
- the risk amount.
-*/
-
-let stopDistance =
-price*0.01;
-
-
-/*
- Synthetic demo position size.
-*/
-
-let size =
-risk/stopDistance;
-
-
-if(size <= 0)
-return;
-
-
-let stopLoss;
-
-let takeProfit;
-
-
-if(type==="BUY"){
-
-stopLoss =
-price-stopDistance;
-
-takeProfit =
-price+(stopDistance*REWARD_RISK);
-
-}else{
-
-stopLoss =
-price+stopDistance;
-
-takeProfit =
-price-(stopDistance*REWARD_RISK);
+    }
 
 }
 
 
-position={
+/* ==========================
+   OPEN TRADE
+========================== */
 
-type:type,
+function openTrade(type){
 
-entry:price,
-
-stopLoss:stopLoss,
-
-takeProfit:takeProfit,
-
-risk:risk,
-
-size:size
-
-};
+    if(position !== null)
+        return;
 
 
-showMessage(
-"🤖 "+type+
-" opened • Risk $"+
-risk.toFixed(2)
-);
+    let risk =
+    balance * RISK_PERCENT;
 
 
-updatePosition();
+    let stopDistance =
+    3.0;
 
+
+    let takeDistance =
+    stopDistance * 2.5;
+
+
+    let stopLoss;
+
+    let takeProfit;
+
+
+    if(type === "BUY"){
+
+        stopLoss =
+        price-stopDistance;
+
+        takeProfit =
+        price+takeDistance;
+
+    }else{
+
+        stopLoss =
+        price+stopDistance;
+
+        takeProfit =
+        price-takeDistance;
+
+    }
+
+
+    position = {
+
+        type:type,
+
+        entry:price,
+
+        stopLoss:stopLoss,
+
+        takeProfit:takeProfit,
+
+        risk:risk
+
+    };
+
+
+    showMessage(
+        "🤖 XAUUSD " +
+        type +
+        " opened"
+    );
+
+    updatePosition();
 }
 
 
-/* =================================
-   POSITION PROFIT
-================================= */
+/* ==========================
+   PROFIT
+========================== */
 
-function getPositionProfit(){
+function getProfit(){
 
-if(position===null)
-return 0;
-
-
-let move;
+    if(!position)
+        return 0;
 
 
-if(position.type==="BUY"){
+    let distance;
 
-move =
-price-position.entry;
 
-}else{
+    if(position.type === "BUY"){
 
-move =
-position.entry-price;
+        distance =
+        price-position.entry;
 
+    }else{
+
+        distance =
+        position.entry-price;
+
+    }
+
+
+    let stopDistance = 3;
+
+    let ratio =
+    distance/stopDistance;
+
+
+    return ratio*position.risk;
 }
 
 
-/*
- Normalize the demo profit so the
- maximum planned loss is the
- calculated risk amount.
-*/
-
-let stopDistance =
-Math.abs(
-position.entry-position.stopLoss
-);
-
-
-let ratio =
-move/stopDistance;
-
-
-return ratio*position.risk;
-
-}
-
-
-/* =================================
-   CHECK STOP / TARGET
-================================= */
+/* ==========================
+   POSITION CHECK
+========================== */
 
 function checkPosition(){
 
-if(position===null)
-return;
+    if(!position)
+        return;
 
 
-if(position.type==="BUY"){
+    if(position.type === "BUY"){
 
-if(price >= position.takeProfit){
+        if(price >= position.takeProfit){
 
-closePosition(
-"TAKE PROFIT"
-);
+            closeTrade("TAKE PROFIT");
 
-return;
+            return;
+        }
 
-}
+        if(price <= position.stopLoss){
 
+            closeTrade("STOP LOSS");
 
-if(price <= position.stopLoss){
+            return;
+        }
 
-closePosition(
-"STOP LOSS"
-);
+    }else{
 
-return;
+        if(price <= position.takeProfit){
 
-}
+            closeTrade("TAKE PROFIT");
 
-}
+            return;
+        }
 
+        if(price >= position.stopLoss){
 
-if(position.type==="SELL"){
+            closeTrade("STOP LOSS");
 
-if(price <= position.takeProfit){
+            return;
+        }
 
-closePosition(
-"TAKE PROFIT"
-);
-
-return;
+    }
 
 }
 
 
-if(price >= position.stopLoss){
+/* ==========================
+   CLOSE TRADE
+========================== */
 
-closePosition(
-"STOP LOSS"
-);
+function closeTrade(reason){
 
-return;
-
-}
-
-}
-
-}
+    if(!position)
+        return;
 
 
-/* =================================
-   CLOSE POSITION
-================================= */
-
-function closePosition(reason){
-
-if(position===null)
-return;
+    let profit =
+    getProfit();
 
 
-let profit =
-getPositionProfit();
+    /*
+      Never allow a demo stop-loss
+      to exceed the planned risk.
+    */
+
+    if(profit < -position.risk)
+        profit = -position.risk;
 
 
-/*
- Protect the demo from numerical
- overshoot beyond planned risk.
-*/
+    /*
+      Lock exact target profit.
+    */
 
-if(profit < -position.risk){
+    if(reason === "TAKE PROFIT"){
 
-profit=-position.risk;
+        profit =
+        position.risk * 2.5;
 
-}
-
-
-let targetProfit =
-position.risk*REWARD_RISK;
+    }
 
 
-if(reason==="TAKE PROFIT"){
+    balance += profit;
 
-profit=targetProfit;
-
-}
+    profitToday += profit;
 
 
-balance += profit;
+    if(profit > 0){
 
-totalProfit += profit;
+        wins++;
 
+        if(profit > bestTrade)
+            bestTrade = profit;
 
-if(profit > 0){
+    }else{
 
-wins++;
+        losses++;
 
-if(profit > bestTrade){
+        dailyLoss +=
+        Math.abs(profit);
 
-bestTrade=profit;
+        if(profit < worstTrade)
+            worstTrade = profit;
 
-}
-
-}else{
-
-losses++;
-
-dailyLoss +=
-Math.abs(profit);
-
-if(profit < worstTrade){
-
-worstTrade=profit;
-
-}
-
-}
+    }
 
 
-history.unshift({
+    history.unshift({
 
-time:
-new Date().toLocaleTimeString(),
+        type:position.type,
 
-type:
-position.type,
+        reason:reason,
 
-reason:
-reason,
+        profit:profit,
 
-profit:
-profit,
+        balance:balance,
 
-balance:
-balance
+        time:new Date()
+            .toLocaleTimeString()
 
-});
+    });
 
 
-position=null;
+    position = null;
 
 
-showMessage(
+    updateHistory();
 
-reason+
-" • "+
-(profit>=0?"+":"")+
-"$"+profit.toFixed(2)
+    updatePosition();
 
-);
+    updateDisplay();
 
 
-updateHistory();
+    showMessage(
+        reason +
+        " • " +
+        (profit >= 0 ? "+" : "") +
+        "$" +
+        profit.toFixed(2)
+    );
 
-updatePosition();
 
-updateDisplay();
+    /*
+      TARGET LOCK
+    */
+
+    if(profitToday >= TARGET_PROFIT){
+
+        finishTarget();
+
+    }
 
 
-/*
- Stop if the account has reached
- its daily loss limit.
-*/
+    /*
+      LOSS PROTECTION
+    */
 
-if(dailyLoss >=
-getDailyLimit()){
+    if(dailyLoss >= DAILY_LOSS_LIMIT){
 
-stopRobot();
+        stopRobot();
+
+    }
 
 }
 
 
-/*
- Protect a very small account
- from reaching zero.
-*/
+/* ==========================
+   TARGET REACHED
+========================== */
 
-if(balance <= 1){
+function finishTarget(){
 
-stopRobot();
+    robot = false;
 
-showMessage(
-"Account protection activated."
-);
+    document.getElementById("status")
+        .innerText =
+        "🏆 DAILY TARGET REACHED";
 
+    document.getElementById("status")
+        .style.color =
+        "#ffd21a";
+
+    document.getElementById("warning")
+        .style.display = "block";
+
+    document.getElementById("warning")
+        .innerText =
+        "The +$5 demo target has been reached. Robot stopped to protect today's profit.";
+
+    showMessage(
+        "🏆 +$5 TARGET REACHED!"
+    );
 }
 
-}
 
-
-/* =================================
-   DISPLAY POSITION
-================================= */
+/* ==========================
+   POSITION DISPLAY
+========================== */
 
 function updatePosition(){
 
-let box =
-document.getElementById("position");
+    let box =
+    document.getElementById("position");
 
 
-if(position===null){
+    if(!position){
 
-box.innerHTML=
-'<div class="empty">'+
-'Robot is waiting for a trading signal...'+
-'</div>';
+        box.innerHTML =
+        '<div class="empty">' +
+        'Robot is waiting for a gold signal...' +
+        '</div>';
 
-return;
+        return;
+    }
 
+
+    let floating =
+    getProfit();
+
+
+    box.innerHTML = `
+
+    <div class="position">
+
+        <div class="row">
+            <b class="${position.type==="BUY"?"green":"red"}">
+                ${position.type}
+            </b>
+
+            <b>XAU/USD</b>
+        </div>
+
+        <div class="row">
+            <span>Entry</span>
+            <b>$${position.entry.toFixed(2)}</b>
+        </div>
+
+        <div class="row">
+            <span>Current</span>
+            <b>$${price.toFixed(2)}</b>
+        </div>
+
+        <div class="row">
+            <span>Stop Loss</span>
+            <b class="red">$${position.stopLoss.toFixed(2)}</b>
+        </div>
+
+        <div class="row">
+            <span>Take Profit</span>
+            <b class="green">$${position.takeProfit.toFixed(2)}</b>
+        </div>
+
+        <div class="row">
+            <span>Risk</span>
+            <b class="red">-$${position.risk.toFixed(2)}</b>
+        </div>
+
+        <div class="row">
+            <span>Floating P/L</span>
+            <b class="${floating>=0?"green":"red"}">
+                ${floating>=0?"+":""}$${floating.toFixed(2)}
+            </b>
+        </div>
+
+    </div>
+    `;
 }
 
 
-let floating =
-getPositionProfit();
-
-
-box.innerHTML=`
-
-<div class="position">
-
-<div class="row">
-
-<b class="${position.type==="BUY"?"green":"red"}">
-
-${position.type}
-
-</b>
-
-<b>BTC/USD</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Entry</span>
-
-<b>
-$${position.entry.toFixed(2)}
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Current</span>
-
-<b>
-$${price.toFixed(2)}
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Risk</span>
-
-<b class="red">
--$${position.risk.toFixed(2)}
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Stop Loss</span>
-
-<b class="red">
-$${position.stopLoss.toFixed(2)}
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Take Profit</span>
-
-<b class="green">
-$${position.takeProfit.toFixed(2)}
-</b>
-
-</div>
-
-
-<div class="row">
-
-<span>Floating P/L</span>
-
-<b class="${floating>=0?"green":"red"}">
-
-${floating>=0?"+":""}
-$${floating.toFixed(2)}
-
-</b>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-/* =================================
-   ACCOUNT DISPLAY
-================================= */
+/* ==========================
+   DISPLAY
+========================== */
 
 function updateDisplay(){
 
-let floating =
-position ?
-getPositionProfit() :
-0;
+    let floating =
+    position ? getProfit() : 0;
 
 
-let equity =
-balance+floating;
+    let equity =
+    balance + floating;
 
 
-document.getElementById("balance").innerText=
-"$"+balance.toFixed(2);
+    document.getElementById("balance")
+        .innerText =
+        "$"+balance.toFixed(2);
 
 
-document.getElementById("equity").innerText=
-"$"+equity.toFixed(2);
+    document.getElementById("equity")
+        .innerText =
+        "$"+equity.toFixed(2);
 
 
-document.getElementById("totalProfit").innerText=
-(totalProfit>=0?"+":"")+
-"$"+totalProfit.toFixed(2);
+    document.getElementById("profit")
+        .innerText =
+        (profitToday>=0?"+":"") +
+        "$"+profitToday.toFixed(2);
 
 
-document.getElementById("riskBalance").innerText=
-"$"+balance.toFixed(2);
+    document.getElementById("targetProfit")
+        .innerText =
+        (profitToday>=0?"+":"") +
+        "$"+profitToday.toFixed(2);
 
 
-document.getElementById("riskAmount").innerText=
-"$"+getRiskAmount().toFixed(2);
+    let progress =
+    Math.max(
+        0,
+        Math.min(
+            100,
+            (profitToday/TARGET_PROFIT)*100
+        )
+    );
 
 
-document.getElementById("dailyLoss").innerText=
-"$"+dailyLoss.toFixed(2);
+    document.getElementById("progressBar")
+        .style.width =
+        progress+"%";
 
 
-document.getElementById("wins").innerText=
-wins;
+    document.getElementById("risk")
+        .innerText =
+        "$"+(balance*RISK_PERCENT)
+        .toFixed(2);
 
 
-document.getElementById("losses").innerText=
-losses;
+    document.getElementById("wins")
+        .innerText = wins;
 
 
-document.getElementById("best").innerText=
-"$"+bestTrade.toFixed(2);
+    document.getElementById("losses")
+        .innerText = losses;
 
 
-document.getElementById("worst").innerText=
-"$"+worstTrade.toFixed(2);
+    document.getElementById("best")
+        .innerText =
+        "$"+bestTrade.toFixed(2);
 
 
-let total =
-wins+losses;
+    document.getElementById("worst")
+        .innerText =
+        "$"+worstTrade.toFixed(2);
 
 
-let rate =
-total===0 ?
-0 :
-(wins/total)*100;
+    let total =
+    wins+losses;
 
 
-document.getElementById("winRate").innerText=
-rate.toFixed(0)+"%";
+    let rate =
+    total === 0
+    ? 0
+    : (wins/total)*100;
 
+
+    document.getElementById("winRate")
+        .innerText =
+        rate.toFixed(0)+"%";
 }
 
 
-/* =================================
+/* ==========================
    HISTORY
-================================= */
+========================== */
 
 function updateHistory(){
 
-let box =
-document.getElementById("history");
+    let box =
+    document.getElementById("history");
 
 
-if(history.length===0){
+    if(history.length === 0){
 
-box.innerHTML=
-'<div class="empty">No trades yet.</div>';
+        box.innerHTML =
+        '<div class="empty">' +
+        'No trades yet.' +
+        '</div>';
 
-return;
+        return;
+    }
 
+
+    box.innerHTML = "";
+
+
+    history.slice(0,20)
+    .forEach(h=>{
+
+        let div =
+        document.createElement("div");
+
+        div.className =
+        "history";
+
+
+        div.innerHTML = `
+
+        <b>${h.type}</b>
+        &nbsp; ${h.reason}
+
+        <br>
+
+        <span style="color:#72879a">
+        ${h.time}
+        • Balance $${h.balance.toFixed(2)}
+        </span>
+
+        <br>
+
+        <b class="${h.profit>=0?"green":"red"}">
+        ${h.profit>=0?"+":""}
+        $${h.profit.toFixed(2)}
+        </b>
+        `;
+
+
+        box.appendChild(div);
+
+    });
 }
 
 
-box.innerHTML="";
-
-
-history.slice(0,20).forEach(
-function(h){
-
-let div =
-document.createElement("div");
-
-
-div.className="history";
-
-
-div.innerHTML=`
-
-<b>${h.type}</b>
-&nbsp;
-${h.reason}
-
-<br>
-
-<span style="color:#71879b">
-
-${h.time}
-•
-Balance:
-$${h.balance.toFixed(2)}
-
-</span>
-
-<br>
-
-<b class="${h.profit>=0?"green":"red"}">
-
-${h.profit>=0?"+":""}
-$${h.profit.toFixed(2)}
-
-</b>
-
-`;
-
-
-box.appendChild(div);
-
-});
-
-}
-
-
-/* =================================
-   START ROBOT
-================================= */
+/* ==========================
+   START
+========================== */
 
 function startRobot(){
 
-if(balance <= 1){
+    if(profitToday >= TARGET_PROFIT){
 
-showMessage(
-"Account too small to continue."
-);
+        showMessage(
+            "Daily target already reached."
+        );
 
-return;
+        return;
+    }
 
+
+    if(dailyLoss >= DAILY_LOSS_LIMIT){
+
+        showMessage(
+            "Daily loss limit reached."
+        );
+
+        return;
+    }
+
+
+    robot = true;
+
+
+    document.getElementById("status")
+        .innerText =
+        "● ROBOT RUNNING";
+
+
+    document.getElementById("status")
+        .style.color =
+        "#19dfa1";
+
+
+    document.getElementById("warning")
+        .style.display =
+        "none";
+
+
+    showMessage(
+        "Gold robot started"
+    );
 }
 
 
-if(dailyLoss >=
-getDailyLimit()){
-
-showMessage(
-"Daily loss limit reached."
-);
-
-return;
-
-}
-
-
-robotRunning=true;
-
-
-document.getElementById("status")
-.innerText=
-"● ROBOT RUNNING";
-
-
-document.getElementById("status")
-.style.color=
-"#16e0a0";
-
-
-document.getElementById("warning")
-.style.display=
-"none";
-
-
-showMessage(
-"Robot started"
-);
-
-}
-
-
-/* =================================
-   STOP ROBOT
-================================= */
+/* ==========================
+   STOP
+========================== */
 
 function stopRobot(){
 
-robotRunning=false;
+    robot = false;
 
 
-document.getElementById("status")
-.innerText=
-"■ ROBOT STOPPED";
-
-
-document.getElementById("status")
-.style.color=
-"#ff5577";
-
-
-let warning =
-document.getElementById("warning");
-
-
-warning.style.display=
-"block";
-
-
-warning.innerText=
-"Robot stopped. Risk protection is active.";
-
-}
-
-
-/* =================================
-   RESET
-================================= */
-
-function resetDemo(){
-
-balance=START_BALANCE;
-
-price=70000;
-
-robotRunning=true;
-
-position=null;
-
-history=[];
-
-prices=[];
-
-dailyLoss=0;
-
-wins=0;
-
-losses=0;
-
-totalProfit=0;
-
-bestTrade=0;
-
-worstTrade=0;
-
-
-for(let i=0;i<70;i++){
-
-price +=
-(Math.random()-0.47)*180;
-
-prices.push(price);
-
-}
-
-
-document.getElementById("status")
-.innerText=
-"● ROBOT RUNNING";
-
-
-document.getElementById("status")
-.style.color=
-"#16e0a0";
-
-
-document.getElementById("warning")
-.style.display=
-"none";
-
-
-drawChart();
-
-updatePosition();
-
-updateHistory();
-
-updateDisplay();
-
-
-showMessage(
-"$10 demo account reset"
-);
-
-}
-
-
-/* =================================
-   MESSAGE
-================================= */
-
-function showMessage(text){
-
-let box =
-document.getElementById("message");
-
-
-box.innerText=text;
-
-box.style.display="block";
-
-
-setTimeout(
-function(){
-
-box.style.display="none";
-
-},
-2500
-);
-
-}
-
-
-/* =================================
-   START
-================================= */
-
-drawChart();
-
-updatePosition();
-
-updateHistory();
-
-updateDisplay();
-
-
-setInterval(
-updateMarket,
-1000
-);
-
-</script>
-
-</body>
- </html>
+    document.getElementById(
