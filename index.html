@@ -3,281 +3,265 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NOVA TRADE AI</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,Helvetica,sans-serif;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
 }
 
 body{
-    background:#07111f;
-    color:white;
-    min-height:100vh;
+  background:#050b14;
+  color:#fff;
+  min-height:100vh;
 }
 
 header{
-    padding:20px;
-    background:#0b1728;
-    border-bottom:1px solid #20334d;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+  background:#0b1422;
+  padding:18px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #20324a;
 }
 
 .logo{
-    font-size:24px;
-    font-weight:bold;
-    color:#39e6a5;
+  font-size:25px;
+  font-weight:bold;
+  color:#19e6a0;
 }
 
-.status{
-    font-size:13px;
-    color:#39e6a5;
+.online{
+  color:#19e6a0;
+  font-size:13px;
 }
 
 .container{
-    width:94%;
-    max-width:1200px;
-    margin:20px auto;
+  width:92%;
+  max-width:1200px;
+  margin:25px auto;
 }
 
 .hero{
-    background:linear-gradient(135deg,#10263c,#07111f);
-    border:1px solid #203b57;
-    border-radius:18px;
-    padding:25px;
-    margin-bottom:20px;
+  background:linear-gradient(135deg,#10243b,#07101c);
+  border:1px solid #233a55;
+  border-radius:20px;
+  padding:28px;
+  margin-bottom:22px;
 }
 
 .hero h1{
-    font-size:32px;
-    margin-bottom:8px;
+  font-size:34px;
+  margin-bottom:10px;
 }
 
 .hero p{
-    color:#9fb0c5;
+  color:#9badc1;
+  line-height:1.6;
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:20px;
+.demo{
+  display:inline-block;
+  margin-top:15px;
+  background:#1b2d43;
+  color:#9fb2c8;
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:11px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:20px;
 }
 
 .card{
-    background:#0d1b2d;
-    border:1px solid #20334d;
-    border-radius:15px;
-    padding:18px;
+  background:#0c1726;
+  border:1px solid #20344d;
+  border-radius:16px;
+  padding:18px;
 }
 
 .card small{
-    color:#91a4bb;
+  color:#8295aa;
 }
 
-.value{
-    font-size:25px;
-    font-weight:bold;
-    margin-top:8px;
+.card h2{
+  margin-top:8px;
+  font-size:25px;
 }
 
 .green{
-    color:#39e6a5;
+  color:#19e6a0;
 }
 
 .red{
-    color:#ff5d73;
+  color:#ff5570;
 }
 
 .layout{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:20px;
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
 }
 
 .panel{
-    background:#0d1b2d;
-    border:1px solid #20334d;
-    border-radius:18px;
-    padding:20px;
-    margin-bottom:20px;
+  background:#0c1726;
+  border:1px solid #20344d;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:20px;
 }
 
 .panel h2{
-    margin-bottom:15px;
+  margin-bottom:16px;
 }
 
 #chart{
-    width:100%;
-    height:360px;
-    background:#081321;
-    border-radius:12px;
-    display:block;
+  width:100%;
+  height:360px;
+  display:block;
+  background:#07101b;
+  border-radius:12px;
 }
 
-.controls{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-top:15px;
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:15px;
 }
 
 button{
-    border:none;
-    border-radius:10px;
-    padding:14px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.2s;
+  border:0;
+  padding:13px 8px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 button:hover{
-    transform:translateY(-2px);
+  opacity:.85;
 }
 
 .start{
-    background:#39e6a5;
-    color:#04100b;
+  background:#19e6a0;
+  color:#03110b;
 }
 
 .stop{
-    background:#ff5d73;
-    color:white;
+  background:#ff5570;
+  color:white;
 }
 
 .buy{
-    background:#167dff;
-    color:white;
+  background:#147df5;
+  color:white;
 }
 
 .sell{
-    background:#ff5268;
-    color:white;
+  background:#e33e58;
+  color:white;
 }
 
 .reset{
-    background:#273b54;
-    color:white;
+  background:#27394e;
+  color:white;
 }
 
-.info{
-    display:flex;
-    justify-content:space-between;
-    padding:11px 0;
-    border-bottom:1px solid #20334d;
+.row{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #1d2e43;
 }
 
-.info:last-child{
-    border-bottom:none;
+.row:last-child{
+  border-bottom:0;
 }
 
 .progress{
-    height:14px;
-    background:#17283d;
-    border-radius:20px;
-    overflow:hidden;
-    margin:12px 0;
+  height:13px;
+  background:#172638;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:15px;
 }
 
-.progress-bar{
-    height:100%;
-    width:0%;
-    background:#39e6a5;
-    transition:.4s;
+.bar{
+  height:100%;
+  width:0%;
+  background:#19e6a0;
+  transition:.4s;
 }
 
-.trade-box{
-    background:#081321;
-    padding:15px;
-    border-radius:12px;
-    margin-top:15px;
+.position{
+  background:#07101b;
+  padding:15px;
+  border-radius:12px;
 }
 
 .history{
-    max-height:220px;
-    overflow:auto;
+  max-height:230px;
+  overflow:auto;
 }
 
 .trade{
-    display:flex;
-    justify-content:space-between;
-    padding:10px;
-    border-bottom:1px solid #20334d;
-    font-size:13px;
+  display:flex;
+  justify-content:space-between;
+  padding:11px;
+  border-bottom:1px solid #1d2e43;
 }
 
 .badge{
-    padding:5px 8px;
-    border-radius:6px;
-    font-size:11px;
-    font-weight:bold;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:bold;
 }
 
-.badge.buy{
-    background:#123d72;
+.buybadge{
+  background:#123f72;
 }
 
-.badge.sell{
-    background:#60212d;
+.sellbadge{
+  background:#5b1e2b;
 }
 
 .footer{
-    text-align:center;
-    color:#71849b;
-    font-size:12px;
-    padding:25px;
-}
-
-.notice{
-    background:#251f0d;
-    border:1px solid #68551b;
-    color:#d9c47a;
-    padding:12px;
-    border-radius:10px;
-    margin-top:15px;
-    font-size:12px;
+  text-align:center;
+  padding:25px;
+  color:#65788e;
+  font-size:12px;
 }
 
 @media(max-width:850px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
+  .layout{
+    grid-template-columns:1fr;
+  }
 
-    .layout{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:25px;
-    }
-
-    #chart{
-        height:300px;
-    }
+  .buttons{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
 @media(max-width:500px){
+  .hero h1{
+    font-size:26px;
+  }
 
-    .cards{
-        grid-template-columns:1fr 1fr;
-        gap:8px;
-    }
-
-    .card{
-        padding:13px;
-    }
-
-    .value{
-        font-size:20px;
-    }
+  #chart{
+    height:300px;
+  }
 }
 </style>
 </head>
@@ -285,137 +269,104 @@ button:hover{
 <body>
 
 <header>
-
-<div class="logo">
-NOVA TRADE
-</div>
-
-<div class="status" id="status">
-● ROBOT OFFLINE
-</div>
-
+  <div class="logo">NOVA TRADE</div>
+  <div class="online" id="status">● ROBOT OFFLINE</div>
 </header>
-
 
 <div class="container">
 
 <section class="hero">
-
-<h1>AI Trading Dashboard</h1>
-
-<p>
-Professional XAUUSD trading simulator with automated risk management,
-bullish/bearish candlestick analysis and daily target tracking.
-</p>
-
-<div class="notice">
-SHOWCASE / SIMULATION — This dashboard is a demonstration and does not
-guarantee trading profits.
-</div>
-
+  <h1>AI Trading Dashboard</h1>
+  <p>
+    Automated XAUUSD strategy simulator with market analysis,
+    bullish and bearish candlesticks, risk management and daily
+    performance tracking.
+  </p>
+  <span class="demo">DEMO / SIMULATION</span>
 </section>
 
-
-<!-- ACCOUNT CARDS -->
-
-<div class="cards">
+<div class="stats">
 
 <div class="card">
 <small>Balance</small>
-<div class="value" id="balance">$100.00</div>
+<h2 id="balance">$100.00</h2>
 </div>
 
 <div class="card">
 <small>Equity</small>
-<div class="value" id="equity">$100.00</div>
+<h2 id="equity">$100.00</h2>
 </div>
 
 <div class="card">
 <small>Today's P/L</small>
-<div class="value green" id="profit">$0.00</div>
+<h2 id="profit" class="green">$0.00</h2>
 </div>
 
 <div class="card">
 <small>XAUUSD</small>
-<div class="value" id="price">$2650.00</div>
+<h2 id="price">$2650.00</h2>
 </div>
 
 </div>
-
 
 <div class="layout">
 
-
-<!-- LEFT -->
-
 <div>
-
 
 <div class="panel">
 
-<h2>XAUUSD Market</h2>
+<h2>XAUUSD Live Market</h2>
 
 <canvas id="chart"></canvas>
 
-<div class="controls">
+<div class="buttons">
 
-<button class="start" id="startBtn">
-▶ START ROBOT
-</button>
+<button class="start" id="start">▶ START ROBOT</button>
 
-<button class="stop" id="stopBtn">
-■ STOP ROBOT
-</button>
+<button class="stop" id="stop">■ STOP</button>
 
-<button class="buy" id="buyBtn">
-▲ BUY
-</button>
+<button class="buy" id="buy">▲ BUY</button>
 
-<button class="sell" id="sellBtn">
-▼ SELL
-</button>
+<button class="sell" id="sell">▼ SELL</button>
 
-<button class="reset" id="resetBtn">
-↻ RESET
-</button>
+<button class="reset" id="reset">↻ RESET</button>
 
 </div>
 
 </div>
-
 
 <div class="panel">
 
-<h2>Open Position</h2>
+<h2>Current Position</h2>
 
-<div class="trade-box">
+<div class="position">
 
-<div class="info">
+<div class="row">
 <span>Direction</span>
 <strong id="direction">NONE</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Entry</span>
 <strong id="entry">-</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Current</span>
 <strong id="current">-</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Stop Loss</span>
 <strong id="sl">-</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Take Profit</span>
 <strong id="tp">-</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Floating P/L</span>
 <strong id="floating">$0.00</strong>
 </div>
@@ -423,7 +374,6 @@ guarantee trading profits.
 </div>
 
 </div>
-
 
 <div class="panel">
 
@@ -442,66 +392,62 @@ guarantee trading profits.
 
 </div>
 
-
-<!-- RIGHT -->
-
 <div>
 
 <div class="panel">
 
 <h2>Daily Target</h2>
 
-<div class="info">
-<span>Target</span>
-<strong>+$10.00</strong>
+<div class="row">
+<span>Profit Target</span>
+<strong class="green">+$10.00</strong>
 </div>
 
-<div class="info">
-<span>Daily Loss Limit</span>
-<strong>-$5.00</strong>
+<div class="row">
+<span>Max Daily Loss</span>
+<strong class="red">-$5.00</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Risk / Trade</span>
 <strong>1%</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Reward / Risk</span>
 <strong>2 : 1</strong>
 </div>
 
 <div class="progress">
-<div class="progress-bar" id="progress"></div>
+<div class="bar" id="bar"></div>
 </div>
 
-<div id="progressText">
+<p id="targetText" style="margin-top:10px;color:#91a3b8">
 $0.00 / $10.00
-</div>
+</p>
 
 </div>
-
 
 <div class="panel">
 
-<h2>Robot Status</h2>
+<h2>AI Robot</h2>
 
-<div class="info">
-<span>System</span>
-<strong id="robotState">STOPPED</strong>
+<div class="row">
+<span>Status</span>
+<strong id="robotStatus">STOPPED</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Strategy</span>
 <strong>Momentum</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Market</span>
 <strong>XAUUSD</strong>
 </div>
 
-<div class="info">
+<div class="row">
 <span>Mode</span>
 <strong>DEMO</strong>
 </div>
@@ -514,589 +460,473 @@ $0.00 / $10.00
 
 </div>
 
-
 <div class="footer">
-NOVA TRADE AI • DEMO TRADING DASHBOARD<br>
-Simulation only — not financial advice and not a guaranteed profit system.
+NOVA TRADE AI<br>
+Demo trading environment • Results are simulated • No profit is guaranteed
 </div>
 
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded",function(){
 
-let balance = 100;
-let startingBalance = 100;
+const canvas=document.getElementById("chart");
+const ctx=canvas.getContext("2d");
 
-let dailyProfit = 0;
+let balance=100;
+let dailyProfit=0;
+let price=2650;
 
-let price = 2650;
+let robot=false;
+let position=null;
+let history=[];
+let candles=[];
 
-let robotRunning = false;
+const TARGET=10;
+const MAXLOSS=5;
+const RISK=1;
+const RR=2;
 
-let position = null;
-
-let history = [];
-
-let candles = [];
-
-const DAILY_TARGET = 10;
-const DAILY_LOSS = 5;
-
-const RISK = 1;
-
-const RR = 2;
-
-const canvas = document.getElementById("chart");
-
-const ctx = canvas.getContext("2d");
-
-
-function resizeCanvas(){
-
-canvas.width = canvas.clientWidth;
-
-canvas.height = canvas.clientHeight;
-
-drawChart();
-
+function resize(){
+  canvas.width=canvas.clientWidth;
+  canvas.height=canvas.clientHeight;
+  draw();
 }
 
-window.addEventListener("resize",resizeCanvas);
+window.addEventListener("resize",resize);
 
 
-function makeCandle(){
+function candle(){
 
-let open = price;
+  let open=price;
 
-let movement = (Math.random() - 0.48) * 8;
+  let move=(Math.random()-0.47)*7;
 
-let close = open + movement;
+  let close=open+move;
 
-let high = Math.max(open,close) + Math.random()*5;
+  let high=Math.max(open,close)+Math.random()*4;
 
-let low = Math.min(open,close) - Math.random()*5;
+  let low=Math.min(open,close)-Math.random()*4;
 
-price = close;
+  price=close;
 
-candles.push({
-open:open,
-close:close,
-high:high,
-low:low
-});
+  candles.push({
+    open:open,
+    close:close,
+    high:high,
+    low:low
+  });
 
-if(candles.length > 45){
-
-candles.shift();
-
-}
-
+  if(candles.length>45){
+    candles.shift();
+  }
 }
 
 
 for(let i=0;i<45;i++){
+  candle();
+}
 
-makeCandle();
+
+function draw(){
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  if(!candles.length)return;
+
+  let high=Math.max(...candles.map(x=>x.high));
+  let low=Math.min(...candles.map(x=>x.low));
+
+  let range=high-low||1;
+
+  let width=canvas.width/candles.length;
+
+  function y(v){
+    return canvas.height-
+    ((v-low)/range)*(canvas.height-30)-15;
+  }
+
+  candles.forEach((c,i)=>{
+
+    let x=i*width+width/2;
+
+    let bullish=c.close>=c.open;
+
+    ctx.strokeStyle=bullish?
+    "#19e6a0":"#ff5570";
+
+    ctx.fillStyle=bullish?
+    "#19e6a0":"#ff5570";
+
+    ctx.lineWidth=1;
+
+    ctx.beginPath();
+    ctx.moveTo(x,y(c.high));
+    ctx.lineTo(x,y(c.low));
+    ctx.stroke();
+
+    let top=Math.min(y(c.open),y(c.close));
+
+    let height=Math.max(
+      Math.abs(y(c.open)-y(c.close)),2
+    );
+
+    ctx.fillRect(
+      x-width*.3,
+      top,
+      width*.6,
+      height
+    );
+
+  });
 
 }
 
 
-function drawChart(){
+function update(){
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
+  let floating=0;
 
-if(candles.length===0)return;
+  if(position){
 
+    floating=
+    position.direction==="BUY"
+    ?
+    (price-position.entry)*position.size
+    :
+    (position.entry-price)*position.size;
 
-let highs = candles.map(c=>c.high);
+  }
 
-let lows = candles.map(c=>c.low);
+  document.getElementById("balance")
+  .textContent="$"+balance.toFixed(2);
 
-let max = Math.max(...highs);
+  document.getElementById("equity")
+  .textContent="$"+(balance+floating).toFixed(2);
 
-let min = Math.min(...lows);
+  let p=document.getElementById("profit");
 
-let range = max-min || 1;
+  p.textContent=
+  (dailyProfit>=0?"+":"")+
+  "$"+dailyProfit.toFixed(2);
 
-let candleWidth = canvas.width / candles.length;
+  p.className=dailyProfit>=0?"green":"red";
 
+  document.getElementById("price")
+  .textContent="$"+price.toFixed(2);
 
-function y(value){
+  document.getElementById("floating")
+  .textContent=
+  (floating>=0?"+":"")+
+  "$"+floating.toFixed(2);
 
-return canvas.height -
-((value-min)/range)*(canvas.height-30)-15;
+  let progress=Math.max(
+    0,
+    Math.min(100,(dailyProfit/TARGET)*100)
+  );
 
-}
+  document.getElementById("bar")
+  .style.width=progress+"%";
 
+  document.getElementById("targetText")
+  .textContent=
+  "$"+dailyProfit.toFixed(2)+" / $10.00";
 
-for(let i=0;i<candles.length;i++){
 
-let c = candles[i];
+  if(position){
 
-let x = i*candleWidth + candleWidth/2;
+    document.getElementById("direction")
+    .textContent=position.direction;
 
-let openY = y(c.open);
+    document.getElementById("entry")
+    .textContent=position.entry.toFixed(2);
 
-let closeY = y(c.close);
+    document.getElementById("current")
+    .textContent=price.toFixed(2);
 
-let highY = y(c.high);
+    document.getElementById("sl")
+    .textContent=position.sl.toFixed(2);
 
-let lowY = y(c.low);
+    document.getElementById("tp")
+    .textContent=position.tp.toFixed(2);
 
+  }else{
 
-let bullish = c.close >= c.open;
+    document.getElementById("direction")
+    .textContent="NONE";
 
+    document.getElementById("entry").textContent="-";
+    document.getElementById("current").textContent="-";
+    document.getElementById("sl").textContent="-";
+    document.getElementById("tp").textContent="-";
 
-ctx.strokeStyle = bullish ? "#39e6a5" : "#ff5268";
-
-ctx.fillStyle = bullish ? "#39e6a5" : "#ff5268";
-
-
-ctx.lineWidth = 1;
-
-ctx.beginPath();
-
-ctx.moveTo(x,highY);
-
-ctx.lineTo(x,lowY);
-
-ctx.stroke();
-
-
-let top = Math.min(openY,closeY);
-
-let height = Math.max(Math.abs(openY-closeY),2);
-
-
-ctx.fillRect(
-x-candleWidth*0.30,
-top,
-candleWidth*0.60,
-height
-);
-
-}
-
-}
-
-
-function updateScreen(){
-
-document.getElementById("balance").textContent =
-"$"+balance.toFixed(2);
-
-let floating = 0;
-
-if(position){
-
-floating =
-position.direction==="BUY"
-?
-(price-position.entry)*position.size
-:
-(position.entry-price)*position.size;
-
-}
-
-document.getElementById("equity").textContent =
-"$"+(balance+floating).toFixed(2);
-
-document.getElementById("profit").textContent =
-(dailyProfit>=0?"+":"")+"$"+dailyProfit.toFixed(2);
-
-document.getElementById("price").textContent =
-"$"+price.toFixed(2);
-
-document.getElementById("floating").textContent =
-(floating>=0?"+":"")+"$"+floating.toFixed(2);
-
-
-let percent =
-Math.max(0,Math.min(100,(dailyProfit/DAILY_TARGET)*100));
-
-document.getElementById("progress").style.width =
-percent+"%";
-
-document.getElementById("progressText").textContent =
-"$"+dailyProfit.toFixed(2)+" / $"+DAILY_TARGET.toFixed(2);
-
-
-if(position){
-
-document.getElementById("direction").textContent =
-position.direction;
-
-document.getElementById("entry").textContent =
-position.entry.toFixed(2);
-
-document.getElementById("current").textContent =
-price.toFixed(2);
-
-document.getElementById("sl").textContent =
-position.sl.toFixed(2);
-
-document.getElementById("tp").textContent =
-position.tp.toFixed(2);
-
-}else{
-
-document.getElementById("direction").textContent="NONE";
-
-document.getElementById("entry").textContent="-";
-
-document.getElementById("current").textContent="-";
-
-document.getElementById("sl").textContent="-";
-
-document.getElementById("tp").textContent="-";
-
-}
-
-}
-
-
-function addHistory(direction,result,amount){
-
-history.unshift({
-direction:direction,
-result:result,
-amount:amount
-});
-
-let box=document.getElementById("history");
-
-box.innerHTML="";
-
-history.slice(0,10).forEach(t=>{
-
-let row=document.createElement("div");
-
-row.className="trade";
-
-row.innerHTML=
-`
-<span>
-<span class="badge ${t.direction.toLowerCase()}">
-${t.direction}
-</span>
-</span>
-
-<strong class="${t.amount>=0?'green':'red'}">
-${t.amount>=0?'+':''}$${t.amount.toFixed(2)}
-</strong>
-`;
-
-box.appendChild(row);
-
-});
+  }
 
 }
 
 
 function openTrade(direction){
 
-if(position){
+  if(position)return;
 
-return;
+  if(dailyProfit>=TARGET){
+    return;
+  }
 
-}
+  if(dailyProfit<=-MAXLOSS){
+    return;
+  }
 
-if(dailyProfit>=DAILY_TARGET){
+  let distance=3;
 
-alert("Daily target reached. Robot is locked.");
+  position={
+    direction:direction,
+    entry:price,
+    size:RISK/distance,
+    sl:
+    direction==="BUY"
+    ?price-distance
+    :price+distance,
+    tp:
+    direction==="BUY"
+    ?price+distance*RR
+    :price-distance*RR
+  };
 
-return;
-
-}
-
-if(dailyProfit<=-DAILY_LOSS){
-
-alert("Daily loss limit reached.");
-
-return;
-
-}
-
-
-let riskMoney = RISK;
-
-let distance = 3;
-
-position={
-
-direction:direction,
-
-entry:price,
-
-size:riskMoney/distance,
-
-sl:
-direction==="BUY"
-?
-price-distance
-:
-price+distance,
-
-tp:
-direction==="BUY"
-?
-price+distance*RR
-:
-price-distance*RR
-
-};
-
-updateScreen();
+  update();
 
 }
 
 
 function closeTrade(result){
 
-if(!position)return;
+  if(!position)return;
 
-let amount =
-result==="TP"
-?
-RISK*RR
-:
--RISK;
+  let amount=
+  result==="TP"
+  ?RISK*RR
+  :-RISK;
 
+  balance+=amount;
+  dailyProfit+=amount;
 
-balance += amount;
+  history.unshift({
+    direction:position.direction,
+    result:result,
+    amount:amount
+  });
 
-dailyProfit += amount;
+  showHistory();
 
-addHistory(
-position.direction,
-result,
-amount
-);
+  position=null;
 
-position=null;
-
-updateScreen();
-
-
-if(dailyProfit>=DAILY_TARGET){
-
-robotRunning=false;
-
-document.getElementById("status").textContent =
-"● TARGET REACHED";
-
-document.getElementById("robotState").textContent =
-"TARGET LOCK";
-
-}
-
-if(dailyProfit<=-DAILY_LOSS){
-
-robotRunning=false;
-
-document.getElementById("status").textContent =
-"● LOSS LIMIT";
-
-document.getElementById("robotState").textContent =
-"RISK LOCK";
-
-}
+  update();
 
 }
 
 
-function checkPosition(){
+function showHistory(){
 
-if(!position)return;
+  const box=document.getElementById("history");
 
+  box.innerHTML="";
 
-if(position.direction==="BUY"){
+  history.slice(0,10).forEach(t=>{
 
-if(price<=position.sl){
+    let div=document.createElement("div");
 
-closeTrade("SL");
+    div.className="trade";
+
+    div.innerHTML=`
+
+      <span>
+        <span class="badge ${
+          t.direction==="BUY"
+          ?"buybadge"
+          :"sellbadge"
+        }">
+          ${t.direction}
+        </span>
+        ${t.result}
+      </span>
+
+      <strong class="${
+        t.amount>=0?"green":"red"
+      }">
+        ${t.amount>=0?"+":""}
+        $${t.amount.toFixed(2)}
+      </strong>
+
+    `;
+
+    box.appendChild(div);
+
+  });
 
 }
 
-else if(price>=position.tp){
 
-closeTrade("TP");
+function checkTrade(){
 
-}
+  if(!position)return;
 
-}
+  if(position.direction==="BUY"){
 
+    if(price<=position.sl){
+      closeTrade("SL");
+    }
+    else if(price>=position.tp){
+      closeTrade("TP");
+    }
 
-if(position.direction==="SELL"){
+  }
 
-if(price>=position.sl){
+  if(position.direction==="SELL"){
 
-closeTrade("SL");
+    if(price>=position.sl){
+      closeTrade("SL");
+    }
+    else if(price<=position.tp){
+      closeTrade("TP");
+    }
 
-}
-
-else if(price<=position.tp){
-
-closeTrade("TP");
-
-}
-
-}
+  }
 
 }
 
 
 function robotDecision(){
 
-if(!robotRunning)return;
+  if(!robot)return;
 
-if(position)return;
+  if(position)return;
 
-if(dailyProfit>=DAILY_TARGET)return;
+  if(dailyProfit>=TARGET)return;
 
-if(dailyProfit<=-DAILY_LOSS)return;
+  if(dailyProfit<=-MAXLOSS)return;
 
+  if(candles.length<3)return;
 
-let len=candles.length;
+  let a=candles[candles.length-2];
+  let b=candles[candles.length-1];
 
-if(len<3)return;
+  let bullish=
+  a.close>a.open &&
+  b.close>b.open;
 
-let a=candles[len-2];
+  let bearish=
+  a.close<a.open &&
+  b.close<b.open;
 
-let b=candles[len-1];
+  if(bullish && Math.random()<0.65){
 
+    openTrade("BUY");
 
-let bullish =
-a.close>a.open &&
-b.close>b.open;
+  }
 
-let bearish =
-a.close<a.open &&
-b.close<b.open;
+  else if(bearish && Math.random()<0.65){
 
+    openTrade("SELL");
 
-if(bullish && Math.random()<0.45){
-
-openTrade("BUY");
-
-}
-
-else if(bearish && Math.random()<0.45){
-
-openTrade("SELL");
-
-}
+  }
 
 }
 
 
-document.getElementById("startBtn")
+document.getElementById("start")
 .addEventListener("click",function(){
 
-robotRunning=true;
+  robot=true;
 
-document.getElementById("status").textContent =
-"● ROBOT ONLINE";
+  document.getElementById("status")
+  .textContent="● ROBOT ONLINE";
 
-document.getElementById("robotState").textContent =
-"RUNNING";
+  document.getElementById("robotStatus")
+  .textContent="RUNNING";
 
 });
 
 
-document.getElementById("stopBtn")
+document.getElementById("stop")
 .addEventListener("click",function(){
 
-robotRunning=false;
+  robot=false;
 
-document.getElementById("status").textContent =
-"● ROBOT OFFLINE";
+  document.getElementById("status")
+  .textContent="● ROBOT OFFLINE";
 
-document.getElementById("robotState").textContent =
-"STOPPED";
+  document.getElementById("robotStatus")
+  .textContent="STOPPED";
 
 });
 
 
-document.getElementById("buyBtn")
+document.getElementById("buy")
 .addEventListener("click",function(){
 
-openTrade("BUY");
+  openTrade("BUY");
 
 });
 
 
-document.getElementById("sellBtn")
+document.getElementById("sell")
 .addEventListener("click",function(){
 
-openTrade("SELL");
+  openTrade("SELL");
 
 });
 
 
-document.getElementById("resetBtn")
+document.getElementById("reset")
 .addEventListener("click",function(){
 
-balance=startingBalance;
+  balance=100;
+  dailyProfit=0;
+  price=2650;
+  robot=false;
+  position=null;
+  history=[];
+  candles=[];
 
-dailyProfit=0;
+  for(let i=0;i<45;i++){
+    candle();
+  }
 
-price=2650;
+  document.getElementById("status")
+  .textContent="● ROBOT OFFLINE";
 
-position=null;
+  document.getElementById("robotStatus")
+  .textContent="STOPPED";
 
-history=[];
+  document.getElementById("history").innerHTML=
+  `<div class="trade">
+    <span>No trades yet</span>
+    <span>—</span>
+  </div>`;
 
-candles=[];
-
-for(let i=0;i<45;i++){
-
-makeCandle();
-
-}
-
-robotRunning=false;
-
-document.getElementById("status").textContent =
-"● ROBOT OFFLINE";
-
-document.getElementById("robotState").textContent =
-"STOPPED";
-
-document.getElementById("history").innerHTML=
-`
-<div class="trade">
-<span>No trades yet</span>
-<span>—</span>
-</div>
-`;
-
-updateScreen();
-
-drawChart();
+  update();
+  draw();
 
 });
 
 
 setInterval(function(){
 
-makeCandle();
+  candle();
 
-drawChart();
+  draw();
 
-checkPosition();
+  checkTrade();
 
-robotDecision();
+  robotDecision();
 
-updateScreen();
+  update();
 
 },1200);
 
 
-resizeCanvas();
-
-updateScreen();
+resize();
+update();
 
 });
 
