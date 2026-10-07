@@ -1,203 +1,351 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NOVA TRADE AI DEMO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOVA TRADE - $10 Growth Demo</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
+
 body{
- margin:0;
- background:#06111d;
- color:#fff;
- font-family:Arial,sans-serif;
+    margin:0;
+    background:#06111d;
+    color:#fff;
+    font-family:Arial,sans-serif;
 }
+
 header{
- padding:17px;
- background:#091a2b;
- border-bottom:1px solid #23415b;
- display:flex;
- justify-content:space-between;
- align-items:center;
+    position:sticky;
+    top:0;
+    z-index:20;
+    padding:16px;
+    background:#091a2b;
+    border-bottom:1px solid #203c55;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.logo{font-size:23px;font-weight:bold}
-.logo span{color:#16e0a0}
-.badge{
- color:#ffc400;
- border:1px solid #806900;
- background:#302909;
- padding:8px 11px;
- border-radius:20px;
- font-size:11px;
- font-weight:bold;
+
+.logo{
+    font-size:23px;
+    font-weight:bold;
 }
-.container{max-width:1000px;margin:auto;padding:14px}
+
+.logo span{
+    color:#16e0a0;
+}
+
+.demo{
+    color:#ffc400;
+    background:#302909;
+    border:1px solid #806900;
+    padding:8px 11px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:14px;
+}
+
 .grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
+
 .card{
- background:#0b1b2c;
- border:1px solid #1d3a54;
- border-radius:17px;
- padding:17px;
- margin-bottom:13px;
- box-shadow:0 8px 25px #0005;
+    background:#0b1b2c;
+    border:1px solid #1c3b55;
+    border-radius:17px;
+    padding:17px;
+    margin-bottom:13px;
+    box-shadow:0 8px 25px #0005;
 }
-.label{font-size:12px;color:#8196aa}
-.value{font-size:23px;font-weight:bold;margin-top:6px}
-.green{color:#16e0a0}
-.red{color:#ff5577}
-.yellow{color:#ffc400}
+
+.label{
+    color:#8196aa;
+    font-size:12px;
+}
+
+.value{
+    margin-top:6px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.green{
+    color:#16e0a0;
+}
+
+.red{
+    color:#ff5577;
+}
+
+.yellow{
+    color:#ffc400;
+}
+
 .market{
- display:flex;
- justify-content:space-between;
- align-items:center;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.symbol{font-size:22px;font-weight:bold}
-.price{font-size:24px;font-weight:bold}
+
+.symbol{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.price{
+    font-size:23px;
+    font-weight:bold;
+}
+
 .chart{
- height:270px;
- background:#071521;
- border:1px solid #193752;
- border-radius:13px;
- margin-top:15px;
- overflow:hidden;
+    height:250px;
+    margin-top:15px;
+    background:#071521;
+    border:1px solid #193752;
+    border-radius:13px;
+    overflow:hidden;
 }
-svg{width:100%;height:100%}
+
+.chart svg{
+    width:100%;
+    height:100%;
+}
+
 .title{
- font-size:18px;
- font-weight:bold;
- margin-bottom:13px;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:13px;
 }
+
 .status{
- background:#092b25;
- color:#16e0a0;
- padding:12px;
- border-radius:10px;
- margin-bottom:12px;
- text-align:center;
- font-weight:bold;
+    padding:12px;
+    border-radius:10px;
+    text-align:center;
+    background:#092b25;
+    color:#16e0a0;
+    margin-bottom:12px;
+    font-weight:bold;
 }
-.risk{
- background:#081b2b;
- border:1px solid #254762;
- padding:12px;
- border-radius:10px;
- margin-bottom:12px;
+
+.riskbox{
+    background:#081b2b;
+    border:1px solid #254762;
+    padding:12px;
+    border-radius:11px;
 }
+
 .row{
- display:flex;
- justify-content:space-between;
- padding:6px 0;
- font-size:13px;
+    display:flex;
+    justify-content:space-between;
+    padding:7px 0;
+    font-size:13px;
 }
-.buttons{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px;
-}
+
 button{
- width:100%;
- border:0;
- border-radius:10px;
- padding:14px;
- color:white;
- font-weight:bold;
- font-size:14px;
+    width:100%;
+    border:0;
+    padding:14px;
+    border-radius:10px;
+    color:#fff;
+    font-weight:bold;
+    font-size:14px;
+    cursor:pointer;
 }
-.start{background:#08a879}
-.stop{background:#d82f54}
-.reset{background:#1c344b;margin-top:10px}
+
+.start{
+    background:#08a879;
+}
+
+.stop{
+    background:#d82f54;
+}
+
+.reset{
+    background:#1d354c;
+    margin-top:10px;
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:12px;
+}
+
 .position{
- background:#071624;
- border:1px solid #1b3a52;
- border-radius:12px;
- padding:14px;
- margin-top:9px;
+    background:#071624;
+    border:1px solid #1c3b54;
+    border-radius:12px;
+    padding:14px;
 }
-.close{background:#29435b;margin-top:10px}
-.empty{
- text-align:center;
- color:#6f8498;
- padding:20px;
-}
+
 .history{
- border-bottom:1px solid #1a3449;
- padding:10px 0;
- font-size:13px;
+    padding:10px 0;
+    border-bottom:1px solid #193348;
+    font-size:13px;
 }
+
+.empty{
+    text-align:center;
+    color:#6e8498;
+    padding:20px;
+}
+
 .warning{
- background:#401b25;
- border:1px solid #a63850;
- color:#ff9aaa;
- padding:11px;
- border-radius:9px;
- margin-top:10px;
- display:none;
- font-size:12px;
+    display:none;
+    margin-top:12px;
+    padding:12px;
+    border-radius:9px;
+    background:#411b25;
+    border:1px solid #a33850;
+    color:#ff9aaa;
+    font-size:12px;
 }
-#msg{
- position:fixed;
- bottom:20px;
- left:50%;
- transform:translateX(-50%);
- background:#173149;
- border:1px solid #39617d;
- padding:12px 17px;
- border-radius:10px;
- display:none;
- width:90%;
- text-align:center;
- z-index:99;
+
+#message{
+    display:none;
+    position:fixed;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%);
+    width:90%;
+    max-width:400px;
+    padding:13px;
+    border-radius:10px;
+    background:#173149;
+    border:1px solid #39617d;
+    text-align:center;
+    z-index:100;
 }
+
 footer{
- text-align:center;
- color:#647b90;
- padding:20px;
- font-size:11px;
+    text-align:center;
+    color:#62798e;
+    font-size:11px;
+    padding:25px;
 }
+
 @media(max-width:500px){
- .value{font-size:19px}
- .price{font-size:20px}
- .symbol{font-size:19px}
+
+    .value{
+        font-size:19px;
+    }
+
+    .price{
+        font-size:20px;
+    }
+
+    .symbol{
+        font-size:18px;
+    }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
 <header>
- <div class="logo">NOVA <span>TRADE</span></div>
- <div class="badge">● DEMO AI</div>
+
+<div class="logo">
+NOVA <span>TRADE</span>
+</div>
+
+<div class="demo">
+● $10 DEMO
+</div>
+
 </header>
 
+
 <div class="container">
+
 
 <!-- ACCOUNT -->
 
 <div class="grid">
 
 <div class="card">
- <div class="label">BALANCE</div>
- <div class="value" id="balance">$10,000.00</div>
+
+<div class="label">
+BALANCE
 </div>
 
-<div class="card">
- <div class="label">EQUITY</div>
- <div class="value" id="equity">$10,000.00</div>
+<div
+class="value"
+id="balance">
+
+$10.00
+
 </div>
 
-<div class="card">
- <div class="label">TOTAL PROFIT</div>
- <div class="value green" id="totalProfit">$0.00</div>
 </div>
 
+
 <div class="card">
- <div class="label">WIN RATE</div>
- <div class="value" id="winRate">0%</div>
+
+<div class="label">
+EQUITY
+</div>
+
+<div
+class="value"
+id="equity">
+
+$10.00
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="label">
+TOTAL PROFIT
+</div>
+
+<div
+class="value green"
+id="totalProfit">
+
+$0.00
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="label">
+WIN RATE
+</div>
+
+<div
+class="value"
+id="winRate">
+
+0%
+
+</div>
+
 </div>
 
 </div>
@@ -210,36 +358,71 @@ footer{
 <div class="market">
 
 <div>
- <div class="symbol">₿ BTC/USD</div>
- <div id="trend" class="green">UPTREND</div>
+
+<div class="symbol">
+₿ BTC/USD
 </div>
+
+<div
+id="trend"
+class="green">
+
+DEMO MARKET
+
+</div>
+
+</div>
+
 
 <div style="text-align:right">
- <div class="price" id="price">$70,000.00</div>
- <div class="label">DEMO PRICE</div>
+
+<div
+class="price"
+id="price">
+
+$70,000.00
+
+</div>
+
+<div class="label">
+SIMULATED PRICE
 </div>
 
 </div>
+
+</div>
+
 
 <div class="chart">
 
-<svg viewBox="0 0 800 270"
+<svg
+viewBox="0 0 800 250"
 preserveAspectRatio="none">
 
 <defs>
-<pattern id="grid"
+
+<pattern
+id="grid"
 width="50"
 height="50"
 patternUnits="userSpaceOnUse">
-<path d="M50 0L0 0 0 50"
+
+<path
+d="M50 0L0 0 0 50"
 fill="none"
 stroke="#163047"/>
+
 </pattern>
+
 </defs>
 
-<rect width="800"
-height="270"
-fill="url(#grid)"/>
+
+<rect
+width="800"
+height="250"
+fill="url(#grid)">
+</rect>
+
 
 <polyline
 id="line"
@@ -256,81 +439,243 @@ points="">
 </div>
 
 
+<!-- RISK MANAGER -->
+
+<div class="card">
+
+<div class="title">
+🛡️ $10 ACCOUNT RISK MANAGER
+</div>
+
+
+<div class="riskbox">
+
+
+<div class="row">
+
+<span>Account</span>
+
+<b id="riskBalance">
+$10.00
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Risk per trade</span>
+
+<b class="yellow">
+2%
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Risk amount</span>
+
+<b id="riskAmount">
+$0.20
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Profit target</span>
+
+<b class="green">
+2.5 × risk
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Maximum daily loss</span>
+
+<b class="red">
+5%
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Daily loss used</span>
+
+<b id="dailyLoss">
+$0.00
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Maximum trades</span>
+
+<b>
+1 at a time
+</b>
+
+</div>
+
+
+</div>
+
+</div>
+
+
 <!-- ROBOT -->
 
 <div class="card">
 
 <div class="title">
-🤖 PROFIT-TARGET ROBOT
+🤖 ACCOUNT GROWTH ROBOT
 </div>
 
-<div id="robotStatus" class="status">
+
+<div
+id="status"
+class="status">
+
 ● ROBOT RUNNING
-</div>
-
-<div class="risk">
-
-<div class="row">
-<span>Strategy</span>
-<b>Trend Following</b>
-</div>
-
-<div class="row">
-<span>Take Profit</span>
-<b class="green">+2%</b>
-</div>
-
-<div class="row">
-<span>Stop Loss</span>
-<b class="red">-1%</b>
-</div>
-
-<div class="row">
-<span>Risk / Trade</span>
-<b>$100 max</b>
-</div>
-
-<div class="row">
-<span>Daily Loss Limit</span>
-<b>$300</b>
-</div>
 
 </div>
+
 
 <div class="buttons">
 
-<button class="start"
+<button
+class="start"
 onclick="startRobot()">
-▶ START ROBOT
+
+▶ START
+
 </button>
 
-<button class="stop"
+
+<button
+class="stop"
 onclick="stopRobot()">
-■ STOP ROBOT
+
+■ STOP
+
 </button>
 
 </div>
 
-<button class="reset"
+
+<button
+class="reset"
 onclick="resetDemo()">
-RESET DEMO
+
+RESET $10 ACCOUNT
+
 </button>
 
-<div id="warning" class="warning"></div>
+
+<div
+id="warning"
+class="warning">
+</div>
 
 </div>
 
 
-<!-- OPEN TRADES -->
+<!-- POSITION -->
 
 <div class="card">
 
 <div class="title">
-OPEN POSITIONS
+OPEN POSITION
 </div>
 
-<div id="positions">
-<div class="empty">Robot is waiting for a signal...</div>
+
+<div id="position">
+
+<div class="empty">
+Robot is waiting for a trading signal...
+</div>
+
+</div>
+
+</div>
+
+
+<!-- STATISTICS -->
+
+<div class="card">
+
+<div class="title">
+PERFORMANCE
+</div>
+
+
+<div class="row">
+
+<span>Winning trades</span>
+
+<b
+class="green"
+id="wins">
+
+0
+
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Losing trades</span>
+
+<b
+class="red"
+id="losses">
+
+0
+
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Best trade</span>
+
+<b
+class="green"
+id="best">
+
+$0.00
+
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Worst trade</span>
+
+<b
+class="red"
+id="worst">
+
+$0.00
+
+</b>
+
 </div>
 
 </div>
@@ -344,742 +689,1083 @@ OPEN POSITIONS
 TRADE HISTORY
 </div>
 
+
 <div id="history">
-<div class="empty">No completed trades yet.</div>
+
+<div class="empty">
+No trades yet.
 </div>
 
 </div>
 
 </div>
+
+
+</div>
+
 
 <footer>
-NOVA TRADE AI DEMO<br>
-Practice simulator — no real money is traded.
+
+NOVA TRADE • $10 GROWTH DEMO<br>
+SIMULATION ONLY — NO REAL MONEY
+
 </footer>
 
-<div id="msg"></div>
+
+<div id="message"></div>
 
 
 <script>
 
-let balance=10000;
-let startingBalance=10000;
-let price=70000;
 
-let positions=[];
-let history=[];
-let prices=[];
+/* =================================
+   ACCOUNT SETTINGS
+================================= */
 
-let robot=true;
+const START_BALANCE = 10;
 
-let totalProfit=0;
-let wins=0;
-let losses=0;
+const RISK_PERCENT = 0.02;
 
-let dailyLoss=0;
+const DAILY_LOSS_PERCENT = 0.05;
 
-const MAX_DAILY_LOSS=300;
+const REWARD_RISK = 2.5;
 
 
-/* CREATE PRICE HISTORY */
+/* =================================
+   ACCOUNT VARIABLES
+================================= */
+
+let balance = START_BALANCE;
+
+let price = 70000;
+
+let robotRunning = true;
+
+let position = null;
+
+let history = [];
+
+let prices = [];
+
+let dailyLoss = 0;
+
+let wins = 0;
+
+let losses = 0;
+
+let totalProfit = 0;
+
+let bestTrade = 0;
+
+let worstTrade = 0;
+
+
+/* =================================
+   CREATE PRICE HISTORY
+================================= */
 
 for(let i=0;i<70;i++){
 
- price += 80;
+price +=
+(Math.random()-0.47)*180;
 
- prices.push(price);
-
-}
-
-
-/* PRICE ENGINE */
-
-function updatePrice(){
-
- /*
-   DEMO TREND ENGINE
-
-   The market sometimes trends upward
-   and sometimes downward.
- */
-
- let direction;
-
- if(Math.random()<0.62){
-
-   direction=1;
-
- }else{
-
-   direction=-1;
-
- }
-
- let movement=
- direction*(Math.random()*180+20);
-
- price+=movement;
-
- if(price<60000)price=60000;
- if(price>90000)price=90000;
-
- prices.push(price);
-
- if(prices.length>70)
- prices.shift();
-
- drawChart();
-
- document.getElementById("price").innerText=
- "$"+price.toLocaleString(
- undefined,
- {minimumFractionDigits:2}
- );
-
- updatePositions();
-
- checkRobot();
+prices.push(price);
 
 }
 
 
-/* CHART */
+/* =================================
+   MARKET
+================================= */
 
-function drawChart(){
+function updateMarket(){
 
- let min=Math.min(...prices);
- let max=Math.max(...prices);
-
- let range=max-min;
-
- if(range===0)range=1;
-
- let points="";
-
- prices.forEach((p,i)=>{
-
-   let x=(i/69)*800;
-
-   let y=250-
-   ((p-min)/range)*210;
-
-   points+=
-   x+","+y+" ";
-
- });
-
- document
- .getElementById("line")
- .setAttribute("points",points);
-
-}
+let movement =
+(Math.random()-0.48)*220;
 
 
-/* ROBOT SIGNAL */
-
-function checkRobot(){
-
- if(!robot)return;
-
- if(dailyLoss>=MAX_DAILY_LOSS){
-
-   stopRobot();
-
-   return;
-
- }
+price += movement;
 
 
- /*
-   Only one position at a time.
-   Robot waits for a clear signal.
- */
-
- if(positions.length>0)return;
-
- if(prices.length<10)return;
+if(price < 60000)
+price = 60000;
 
 
- let recent=
- prices[prices.length-1];
-
- let old=
- prices[prices.length-6];
+if(price > 85000)
+price = 85000;
 
 
- let trend=recent-old;
+prices.push(price);
 
 
- /*
-   TREND STRATEGY
+if(prices.length > 70){
 
-   Positive momentum -> BUY
-   Negative momentum -> SELL
- */
-
- if(trend>250){
-
-   openRobotTrade("BUY");
-
- }
-
- else if(trend<-250){
-
-   openRobotTrade("SELL");
-
- }
+prices.shift();
 
 }
 
 
-/* OPEN ROBOT TRADE */
-
-function openRobotTrade(type){
-
- if(!robot)return;
-
- if(positions.length>0)return;
-
-
- let stopLoss;
- let takeProfit;
-
-
- if(type==="BUY"){
-
-   stopLoss=price*0.99;
-
-   takeProfit=price*1.02;
-
- }else{
-
-   stopLoss=price*1.01;
-
-   takeProfit=price*0.98;
-
- }
-
-
- let position={
-
-   id:Date.now(),
-
-   type:type,
-
-   openPrice:price,
-
-   stopLoss:stopLoss,
-
-   takeProfit:takeProfit,
-
-   volume:0.01
-
- };
-
-
- positions.push(position);
-
-
- showMessage(
- "🤖 "+type+
- " signal opened"
- );
-
-
- renderPositions();
-
+document.getElementById("price").innerText =
+"$"+price.toLocaleString(
+undefined,
+{
+minimumFractionDigits:2
 }
+);
 
-
-/* PROFIT */
-
-function getProfit(p){
-
- let difference;
-
- if(p.type==="BUY"){
-
-   difference=price-p.openPrice;
-
- }else{
-
-   difference=p.openPrice-price;
-
- }
-
- return difference*p.volume*10;
-
-}
-
-
-/* CHECK TP / SL */
-
-function updatePositions(){
-
- let floating=0;
-
- positions.forEach(p=>{
-
-   floating+=getProfit(p);
-
- });
-
-
- document.getElementById("equity").innerText=
- "$"+(balance+floating).toFixed(2);
-
-
- renderPositions();
-
-
- /*
-   Automatic exits
- */
-
- positions.slice().forEach(p=>{
-
-   if(p.type==="BUY"){
-
-     if(price>=p.takeProfit){
-
-       closePosition(p,"TAKE PROFIT");
-
-     }
-
-     else if(price<=p.stopLoss){
-
-       closePosition(p,"STOP LOSS");
-
-     }
-
-   }else{
-
-     if(price<=p.takeProfit){
-
-       closePosition(p,"TAKE PROFIT");
-
-     }
-
-     else if(price>=p.stopLoss){
-
-       closePosition(p,"STOP LOSS");
-
-     }
-
-   }
-
- });
-
-}
-
-
-/* CLOSE */
-
-function closePosition(p,reason){
-
- let profit=getProfit(p);
-
-
- balance+=profit;
-
- totalProfit+=profit;
-
-
- if(profit>0){
-
-   wins++;
-
- }else{
-
-   losses++;
-
-   dailyLoss+=Math.abs(profit);
-
- }
-
-
- history.unshift({
-
-   type:p.type,
-
-   reason:reason,
-
-   profit:profit,
-
-   price:price,
-
-   time:new Date().toLocaleTimeString()
-
- });
-
-
- positions=
- positions.filter(x=>x.id!==p.id);
-
-
- updateStats();
-
- renderPositions();
-
- renderHistory();
-
-
- if(profit>0){
-
-   showMessage(
-   "🎯 TAKE PROFIT +$"+
-   profit.toFixed(2)
-   );
-
- }else{
-
-   showMessage(
-   "🛑 STOP LOSS -$"+
-   Math.abs(profit).toFixed(2)
-   );
-
- }
-
-
- if(dailyLoss>=MAX_DAILY_LOSS){
-
-   stopRobot();
-
- }
-
-}
-
-
-/* POSITIONS */
-
-function renderPositions(){
-
- let box=
- document.getElementById("positions");
-
-
- if(positions.length===0){
-
-   box.innerHTML=
-   '<div class="empty">'+
-   'Robot is waiting for a signal...'+
-   '</div>';
-
-   return;
-
- }
-
-
- box.innerHTML="";
-
-
- positions.forEach(p=>{
-
-   let profit=getProfit(p);
-
-
-   let div=
-   document.createElement("div");
-
-   div.className="position";
-
-
-   div.innerHTML=`
-
-   <div class="row">
-
-   <b class="${p.type==="BUY"?"green":"red"}">
-   ${p.type}
-   </b>
-
-   <b>BTC/USD</b>
-
-   </div>
-
-   <div class="row">
-   <span>Entry</span>
-   <b>$${p.openPrice.toFixed(2)}</b>
-   </div>
-
-   <div class="row">
-   <span>Current</span>
-   <b>$${price.toFixed(2)}</b>
-   </div>
-
-   <div class="row">
-   <span>Take Profit</span>
-   <b class="green">$${p.takeProfit.toFixed(2)}</b>
-   </div>
-
-   <div class="row">
-   <span>Stop Loss</span>
-   <b class="red">$${p.stopLoss.toFixed(2)}</b>
-   </div>
-
-   <div class="row">
-
-   <span>Floating P/L</span>
-
-   <b class="${profit>=0?"green":"red"}">
-
-   ${profit>=0?"+":""}
-   $${profit.toFixed(2)}
-
-   </b>
-
-   </div>
-
-   `;
-
-
-   box.appendChild(div);
-
- });
-
-}
-
-
-/* HISTORY */
-
-function renderHistory(){
-
- let box=
- document.getElementById("history");
-
-
- if(history.length===0){
-
-   box.innerHTML=
-   '<div class="empty">No completed trades yet.</div>';
-
-   return;
-
- }
-
-
- box.innerHTML="";
-
-
- history.slice(0,15).forEach(h=>{
-
-   let div=
-   document.createElement("div");
-
-   div.className="history";
-
-
-   div.innerHTML=`
-
-   <b>${h.type}</b>
-   &nbsp; ${h.reason}
-
-   <br>
-
-   <span style="color:#71869a">
-
-   ${h.time}
-   • $${h.price.toFixed(2)}
-
-   </span>
-
-   <br>
-
-   <b class="${h.profit>=0?"green":"red"}">
-
-   ${h.profit>=0?"+":""}
-   $${h.profit.toFixed(2)}
-
-   </b>
-
-   `;
-
-
-   box.appendChild(div);
-
- });
-
-}
-
-
-/* STATS */
-
-function updateStats(){
-
- document.getElementById("balance").innerText=
- "$"+balance.toFixed(2);
-
-
- document.getElementById("totalProfit").innerText=
- (totalProfit>=0?"+":"")+
- "$"+totalProfit.toFixed(2);
-
-
- let total=wins+losses;
-
- let rate=
- total===0
- ?0
- :(wins/total)*100;
-
-
- document.getElementById("winRate").innerText=
- rate.toFixed(0)+"%";
-
-}
-
-
-/* START */
-
-function startRobot(){
-
- if(dailyLoss>=MAX_DAILY_LOSS){
-
-   showMessage(
-   "Daily loss limit reached."
-   );
-
-   return;
-
- }
-
- robot=true;
-
- document
- .getElementById("robotStatus")
- .innerText="● ROBOT RUNNING";
-
- document
- .getElementById("robotStatus")
- .style.color="#16e0a0";
-
- document
- .getElementById("warning")
- .style.display="none";
-
- showMessage("Robot started");
-
-}
-
-
-/* STOP */
-
-function stopRobot(){
-
- robot=false;
-
- document
- .getElementById("robotStatus")
- .innerText="■ ROBOT STOPPED";
-
- document
- .getElementById("robotStatus")
- .style.color="#ff5577";
-
- document
- .getElementById("warning")
- .style.display="block";
-
- document
- .getElementById("warning")
- .innerText=
- "Robot stopped. Risk protection is active.";
-
-}
-
-
-/* RESET */
-
-function resetDemo(){
-
- balance=startingBalance;
-
- price=70000;
-
- positions=[];
-
- history=[];
-
- totalProfit=0;
-
- wins=0;
-
- losses=0;
-
- dailyLoss=0;
-
- robot=true;
-
- prices=[];
-
- for(let i=0;i<70;i++){
-
-   price+=80;
-
-   prices.push(price);
-
- }
-
- document
- .getElementById("warning")
- .style.display="none";
-
- document
- .getElementById("robotStatus")
- .innerText="● ROBOT RUNNING";
-
- document
- .getElementById("robotStatus")
- .style.color="#16e0a0";
-
- updateStats();
-
- renderPositions();
-
- renderHistory();
-
- drawChart();
-
- showMessage(
- "Demo account reset"
- );
-
-}
-
-
-/* MESSAGE */
-
-function showMessage(text){
-
- let m=
- document.getElementById("msg");
-
- m.innerText=text;
-
- m.style.display="block";
-
- setTimeout(()=>{
-
-   m.style.display="none";
-
- },2500);
-
-}
-
-
-/* START */
-
-updateStats();
-
-renderPositions();
-
-renderHistory();
 
 drawChart();
 
+checkPosition();
 
-setInterval(updatePrice,1000);
+robotDecision();
+
+updateDisplay();
+
+}
+
+
+/* =================================
+   CHART
+================================= */
+
+function drawChart(){
+
+let min =
+Math.min(...prices);
+
+let max =
+Math.max(...prices);
+
+let range =
+max-min;
+
+
+if(range===0)
+range=1;
+
+
+let points="";
+
+
+prices.forEach(
+function(p,i){
+
+let x =
+(i/(prices.length-1))*800;
+
+
+let y =
+230-
+((p-min)/range)*200;
+
+
+points +=
+x+","+y+" ";
+
+});
+
+
+document
+.getElementById("line")
+.setAttribute(
+"points",
+points
+);
+
+}
+
+
+/* =================================
+   RISK CALCULATION
+================================= */
+
+function getRiskAmount(){
+
+return balance*RISK_PERCENT;
+
+}
+
+
+function getDailyLimit(){
+
+return balance*DAILY_LOSS_PERCENT;
+
+}
+
+
+/* =================================
+   ROBOT DECISION
+================================= */
+
+function robotDecision(){
+
+if(!robotRunning)
+return;
+
+
+if(position !== null)
+return;
+
+
+if(dailyLoss >=
+getDailyLimit()){
+
+stopRobot();
+
+return;
+
+}
+
+
+/*
+ Simple momentum strategy.
+
+ This is intentionally a demo strategy,
+ not a promise of profit.
+*/
+
+if(prices.length < 10)
+return;
+
+
+let now =
+prices[prices.length-1];
+
+let previous =
+prices[prices.length-7];
+
+
+let momentum =
+now-previous;
+
+
+/*
+ Wait for a stronger movement
+ before entering.
+*/
+
+if(momentum > 250){
+
+openPosition("BUY");
+
+}
+
+else if(momentum < -250){
+
+openPosition("SELL");
+
+}
+
+}
+
+
+/* =================================
+   OPEN POSITION
+================================= */
+
+function openPosition(type){
+
+if(position !== null)
+return;
+
+
+let risk =
+getRiskAmount();
+
+
+/*
+ Demo uses a 1% price stop.
+
+ The position size is calculated so
+ the maximum planned loss equals
+ the risk amount.
+*/
+
+let stopDistance =
+price*0.01;
+
+
+/*
+ Synthetic demo position size.
+*/
+
+let size =
+risk/stopDistance;
+
+
+if(size <= 0)
+return;
+
+
+let stopLoss;
+
+let takeProfit;
+
+
+if(type==="BUY"){
+
+stopLoss =
+price-stopDistance;
+
+takeProfit =
+price+(stopDistance*REWARD_RISK);
+
+}else{
+
+stopLoss =
+price+stopDistance;
+
+takeProfit =
+price-(stopDistance*REWARD_RISK);
+
+}
+
+
+position={
+
+type:type,
+
+entry:price,
+
+stopLoss:stopLoss,
+
+takeProfit:takeProfit,
+
+risk:risk,
+
+size:size
+
+};
+
+
+showMessage(
+"🤖 "+type+
+" opened • Risk $"+
+risk.toFixed(2)
+);
+
+
+updatePosition();
+
+}
+
+
+/* =================================
+   POSITION PROFIT
+================================= */
+
+function getPositionProfit(){
+
+if(position===null)
+return 0;
+
+
+let move;
+
+
+if(position.type==="BUY"){
+
+move =
+price-position.entry;
+
+}else{
+
+move =
+position.entry-price;
+
+}
+
+
+/*
+ Normalize the demo profit so the
+ maximum planned loss is the
+ calculated risk amount.
+*/
+
+let stopDistance =
+Math.abs(
+position.entry-position.stopLoss
+);
+
+
+let ratio =
+move/stopDistance;
+
+
+return ratio*position.risk;
+
+}
+
+
+/* =================================
+   CHECK STOP / TARGET
+================================= */
+
+function checkPosition(){
+
+if(position===null)
+return;
+
+
+if(position.type==="BUY"){
+
+if(price >= position.takeProfit){
+
+closePosition(
+"TAKE PROFIT"
+);
+
+return;
+
+}
+
+
+if(price <= position.stopLoss){
+
+closePosition(
+"STOP LOSS"
+);
+
+return;
+
+}
+
+}
+
+
+if(position.type==="SELL"){
+
+if(price <= position.takeProfit){
+
+closePosition(
+"TAKE PROFIT"
+);
+
+return;
+
+}
+
+
+if(price >= position.stopLoss){
+
+closePosition(
+"STOP LOSS"
+);
+
+return;
+
+}
+
+}
+
+}
+
+
+/* =================================
+   CLOSE POSITION
+================================= */
+
+function closePosition(reason){
+
+if(position===null)
+return;
+
+
+let profit =
+getPositionProfit();
+
+
+/*
+ Protect the demo from numerical
+ overshoot beyond planned risk.
+*/
+
+if(profit < -position.risk){
+
+profit=-position.risk;
+
+}
+
+
+let targetProfit =
+position.risk*REWARD_RISK;
+
+
+if(reason==="TAKE PROFIT"){
+
+profit=targetProfit;
+
+}
+
+
+balance += profit;
+
+totalProfit += profit;
+
+
+if(profit > 0){
+
+wins++;
+
+if(profit > bestTrade){
+
+bestTrade=profit;
+
+}
+
+}else{
+
+losses++;
+
+dailyLoss +=
+Math.abs(profit);
+
+if(profit < worstTrade){
+
+worstTrade=profit;
+
+}
+
+}
+
+
+history.unshift({
+
+time:
+new Date().toLocaleTimeString(),
+
+type:
+position.type,
+
+reason:
+reason,
+
+profit:
+profit,
+
+balance:
+balance
+
+});
+
+
+position=null;
+
+
+showMessage(
+
+reason+
+" • "+
+(profit>=0?"+":"")+
+"$"+profit.toFixed(2)
+
+);
+
+
+updateHistory();
+
+updatePosition();
+
+updateDisplay();
+
+
+/*
+ Stop if the account has reached
+ its daily loss limit.
+*/
+
+if(dailyLoss >=
+getDailyLimit()){
+
+stopRobot();
+
+}
+
+
+/*
+ Protect a very small account
+ from reaching zero.
+*/
+
+if(balance <= 1){
+
+stopRobot();
+
+showMessage(
+"Account protection activated."
+);
+
+}
+
+}
+
+
+/* =================================
+   DISPLAY POSITION
+================================= */
+
+function updatePosition(){
+
+let box =
+document.getElementById("position");
+
+
+if(position===null){
+
+box.innerHTML=
+'<div class="empty">'+
+'Robot is waiting for a trading signal...'+
+'</div>';
+
+return;
+
+}
+
+
+let floating =
+getPositionProfit();
+
+
+box.innerHTML=`
+
+<div class="position">
+
+<div class="row">
+
+<b class="${position.type==="BUY"?"green":"red"}">
+
+${position.type}
+
+</b>
+
+<b>BTC/USD</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Entry</span>
+
+<b>
+$${position.entry.toFixed(2)}
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Current</span>
+
+<b>
+$${price.toFixed(2)}
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Risk</span>
+
+<b class="red">
+-$${position.risk.toFixed(2)}
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Stop Loss</span>
+
+<b class="red">
+$${position.stopLoss.toFixed(2)}
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Take Profit</span>
+
+<b class="green">
+$${position.takeProfit.toFixed(2)}
+</b>
+
+</div>
+
+
+<div class="row">
+
+<span>Floating P/L</span>
+
+<b class="${floating>=0?"green":"red"}">
+
+${floating>=0?"+":""}
+$${floating.toFixed(2)}
+
+</b>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =================================
+   ACCOUNT DISPLAY
+================================= */
+
+function updateDisplay(){
+
+let floating =
+position ?
+getPositionProfit() :
+0;
+
+
+let equity =
+balance+floating;
+
+
+document.getElementById("balance").innerText=
+"$"+balance.toFixed(2);
+
+
+document.getElementById("equity").innerText=
+"$"+equity.toFixed(2);
+
+
+document.getElementById("totalProfit").innerText=
+(totalProfit>=0?"+":"")+
+"$"+totalProfit.toFixed(2);
+
+
+document.getElementById("riskBalance").innerText=
+"$"+balance.toFixed(2);
+
+
+document.getElementById("riskAmount").innerText=
+"$"+getRiskAmount().toFixed(2);
+
+
+document.getElementById("dailyLoss").innerText=
+"$"+dailyLoss.toFixed(2);
+
+
+document.getElementById("wins").innerText=
+wins;
+
+
+document.getElementById("losses").innerText=
+losses;
+
+
+document.getElementById("best").innerText=
+"$"+bestTrade.toFixed(2);
+
+
+document.getElementById("worst").innerText=
+"$"+worstTrade.toFixed(2);
+
+
+let total =
+wins+losses;
+
+
+let rate =
+total===0 ?
+0 :
+(wins/total)*100;
+
+
+document.getElementById("winRate").innerText=
+rate.toFixed(0)+"%";
+
+}
+
+
+/* =================================
+   HISTORY
+================================= */
+
+function updateHistory(){
+
+let box =
+document.getElementById("history");
+
+
+if(history.length===0){
+
+box.innerHTML=
+'<div class="empty">No trades yet.</div>';
+
+return;
+
+}
+
+
+box.innerHTML="";
+
+
+history.slice(0,20).forEach(
+function(h){
+
+let div =
+document.createElement("div");
+
+
+div.className="history";
+
+
+div.innerHTML=`
+
+<b>${h.type}</b>
+&nbsp;
+${h.reason}
+
+<br>
+
+<span style="color:#71879b">
+
+${h.time}
+•
+Balance:
+$${h.balance.toFixed(2)}
+
+</span>
+
+<br>
+
+<b class="${h.profit>=0?"green":"red"}">
+
+${h.profit>=0?"+":""}
+$${h.profit.toFixed(2)}
+
+</b>
+
+`;
+
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* =================================
+   START ROBOT
+================================= */
+
+function startRobot(){
+
+if(balance <= 1){
+
+showMessage(
+"Account too small to continue."
+);
+
+return;
+
+}
+
+
+if(dailyLoss >=
+getDailyLimit()){
+
+showMessage(
+"Daily loss limit reached."
+);
+
+return;
+
+}
+
+
+robotRunning=true;
+
+
+document.getElementById("status")
+.innerText=
+"● ROBOT RUNNING";
+
+
+document.getElementById("status")
+.style.color=
+"#16e0a0";
+
+
+document.getElementById("warning")
+.style.display=
+"none";
+
+
+showMessage(
+"Robot started"
+);
+
+}
+
+
+/* =================================
+   STOP ROBOT
+================================= */
+
+function stopRobot(){
+
+robotRunning=false;
+
+
+document.getElementById("status")
+.innerText=
+"■ ROBOT STOPPED";
+
+
+document.getElementById("status")
+.style.color=
+"#ff5577";
+
+
+let warning =
+document.getElementById("warning");
+
+
+warning.style.display=
+"block";
+
+
+warning.innerText=
+"Robot stopped. Risk protection is active.";
+
+}
+
+
+/* =================================
+   RESET
+================================= */
+
+function resetDemo(){
+
+balance=START_BALANCE;
+
+price=70000;
+
+robotRunning=true;
+
+position=null;
+
+history=[];
+
+prices=[];
+
+dailyLoss=0;
+
+wins=0;
+
+losses=0;
+
+totalProfit=0;
+
+bestTrade=0;
+
+worstTrade=0;
+
+
+for(let i=0;i<70;i++){
+
+price +=
+(Math.random()-0.47)*180;
+
+prices.push(price);
+
+}
+
+
+document.getElementById("status")
+.innerText=
+"● ROBOT RUNNING";
+
+
+document.getElementById("status")
+.style.color=
+"#16e0a0";
+
+
+document.getElementById("warning")
+.style.display=
+"none";
+
+
+drawChart();
+
+updatePosition();
+
+updateHistory();
+
+updateDisplay();
+
+
+showMessage(
+"$10 demo account reset"
+);
+
+}
+
+
+/* =================================
+   MESSAGE
+================================= */
+
+function showMessage(text){
+
+let box =
+document.getElementById("message");
+
+
+box.innerText=text;
+
+box.style.display="block";
+
+
+setTimeout(
+function(){
+
+box.style.display="none";
+
+},
+2500
+);
+
+}
+
+
+/* =================================
+   START
+================================= */
+
+drawChart();
+
+updatePosition();
+
+updateHistory();
+
+updateDisplay();
+
+
+setInterval(
+updateMarket,
+1000
+);
 
 </script>
 
 </body>
-     </html>
+ </html>
