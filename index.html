@@ -1,90 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA M15 - SAME FOR ALL</title>
-<style>
-*{box-sizing:border-box;margin:0}body{background:#040d19;color:#fff;font-family:Arial;padding:10px}
-.card{background:#10233d;border:1px solid #1d3e62;border-radius:14px;padding:14px;margin-bottom:10px;text-align:center}
-.big{font-size:28px;font-weight:900;text-align:center;padding:22px;border-radius:14px;margin:10px 0}
-.buySig{background:linear-gradient(90deg,#00b67a,#00ffaa);color:#002a18;animation:flash 0.4s infinite}
-.sellSig{background:linear-gradient(90deg,#d83a5a,#ff5c7a);color:#fff;animation:flash 0.4s infinite}
-.wait{background:#162c44;color:#7d93a8}
-.run{background:#0a2a4a;color:#ffcc00;border:2px solid #ffcc00}
-.closeSig{background:linear-gradient(90deg,#ffcc00,#ff9900);color:#000;animation:flash 0.3s infinite}
-@keyframes flash{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
-.btn{width:100%;padding:18px;border:0;border-radius:14px;font-weight:900;font-size:18px;margin-top:8px;display:none}
-.btn-buy{background:#00ffaa;color:#002a18}
-.btn-sell{background:#ff3b5a;color:#fff}
-.btn-close{background:#ffcc00;color:#000;display:none}
-.btn-mute{background:#222;color:#aaa;font-size:12px;display:block;padding:8px}
-.timer{font-size:48px;font-weight:900;color:#ffcc00;margin:10px 0}
-.tf{background:#ffcc00;color:#000;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:900}
-</style>
-</head>
-<body>
-<div class="card">
-<b>NOVA M15</b> <span class="tf">M15 SAME FOR ALL</span><br>
-<span style="color:#00ffaa">● FBS 106742043 | Real Price Logic</span><br>
-<span id="livePrice" style="font-size:24px;font-weight:800;color:#ffcc00">$-- LIVE</span>
-<div style="font-size:11px;color:#7d93a8">Entry M15 | Hold 15min | Same signal on all devices</div>
-</div>
-
-<div id="signalBox" class="big wait">🔍 TAP TO ENABLE SOUND<br><span style="font-size:12px">M15 scanning starts</span></div>
-
-<div id="timerBox" style="display:none" class="card">
-<div style="font-size:12px;color:#aaa">M15 TRADE RUNNING - CLOSE IN</div>
-<div id="timer" class="timer">15:00</div>
-<div id="profitHint" style="font-size:12px;color:#7d93a8">Lot 0.01 - SL $3.5 | TP $10.5</div>
-</div>
-
-<button id="buyBtn" class="btn btn-buy" onclick="executeTrade('BUY')">🟢 BUY M15 - 15MIN</button>
-<button id="sellBtn" class="btn btn-sell" onclick="executeTrade('SELL')">🔴 SELL M15 - 15MIN</button>
-<button id="closeBtn" class="btn btn-close" onclick="closeTrade()">🟡 CLOSE NOW IN FBS - 15MIN OVER</button>
-<button id="muteBtn" class="btn btn-mute" onclick="muteOnly()">🔇 MUTE ALARM</button>
-
-<audio id="alarmAudio" loop preload="auto" playsinline>
-<source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg">
-</audio>
-
-<script>
-let price=4088, lastPrices=[], alarmPlaying=false, audioCtx=null, currentSide=null, timerInt=null, secondsLeft=900, soundEnabled=false;
-
-function initAudio(){ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); if(audioCtx.state==='suspended') audioCtx.resume(); soundEnabled=true; document.getElementById('signalBox').innerHTML='🔍 SCANNING M15<br><span style="font-size:12px;color:#00ffaa">Sound ON - Real price logic</span>'; document.getElementById('signalBox').className='big wait'; }
-
-async function getLive(){
- try{let r=await fetch('https://api.gold-api.com/price/XAU');let j=await r.json();if(j.price)price=j.price;}catch(e){price+=(Math.random()-0.5)*0.4;}
- document.getElementById('livePrice').innerText='$'+price.toFixed(2)+' LIVE M15';
- lastPrices.push(price);
- if(lastPrices.length>15) lastPrices.shift();
-}
-
-function playAlarm(isBuy, isClose=false){
- if(!soundEnabled) return;
- initAudio(); alarmPlaying=true;
- let el=document.getElementById('alarmAudio'); el.volume=1.0; el.muted=false; el.currentTime=0; el.play().catch(()=>{});
- try{
-   for(let i=0;i<4;i++){
-     setTimeout(()=>{
-       let o=audioCtx.createOscillator();let g=audioCtx.createGain();
-       o.type='square';o.frequency.value=isClose?1300:(isBuy?900:400);
-       g.gain.value=1.0; o.connect(g);g.connect(audioCtx.destination);
-       o.start();setTimeout(()=>{try{o.stop()}catch(e){}},800);
-     }, i*1000);
-   }
- }catch(e){}
- if(navigator.vibrate) navigator.vibrate([500,100,500,100,1000]);
-}
-
 function executeTrade(side){
  currentSide=side; alarmPlaying=false;
  document.getElementById('alarmAudio').pause();
  document.getElementById('buyBtn').style.display='none';
  document.getElementById('sellBtn').style.display='none';
  document.getElementById('timerBox').style.display='block';
+ let entryTime = new Date().toLocaleTimeString('en-KE',{hour:'2-digit',minute:'2-digit',timeZone:'Africa/Nairobi'});
  document.getElementById('signalBox').className='big run';
- document.getElementById('signalBox').innerHTML='▶️ M15 '+side+' RUNNING<br><span style="font-size:14px">$'+price.toFixed(2)+' | 15min</span>';
+ document.getElementById('signalBox').innerHTML='▶️ M15 '+side+' RUNNING<br><span style="font-size:14px">Entry: '+entryTime+' EAT | $'+price.toFixed(2)+'</span>';
  secondsLeft=900; clearInterval(timerInt);
  timerInt=setInterval(()=>{
    secondsLeft--; let m=Math.floor(secondsLeft/60); let s=secondsLeft%60;
@@ -92,7 +14,7 @@ function executeTrade(side){
    if(secondsLeft<=0){
      clearInterval(timerInt); timerInt=null;
      document.getElementById('signalBox').className='big closeSig';
-     document.getElementById('signalBox').innerHTML='⏰ 15MIN OVER<br><span style="font-size:13px">CLOSE '+currentSide+' NOW</span>';
+     document.getElementById('signalBox').innerHTML='⏰ 15MIN OVER - '+entryTime+'<br><span style="font-size:13px">CLOSE '+currentSide+' NOW</span>';
      document.getElementById('closeBtn').style.display='block';
      playAlarm(true,true);
      let iv2=setInterval(()=>{ if(document.getElementById('closeBtn').style.display=='none'){clearInterval(iv2);return;} playAlarm(true,true); },3000);
@@ -100,50 +22,3 @@ function executeTrade(side){
  },1000);
  window.open('https://fbs.com/cabinet','_blank');
 }
-
-function closeTrade(){
- clearInterval(timerInt); timerInt=null;
- document.getElementById('closeBtn').style.display='none';
- document.getElementById('timerBox').style.display='none';
- document.getElementById('signalBox').className='big wait';
- document.getElementById('signalBox').innerHTML='🔍 SCANNING M15<br><span style="font-size:12px">Ready for next trade</span>';
- document.getElementById('alarmAudio').pause(); alarmPlaying=false;
- lastPrices=[]; // reset for fresh signal
- window.open('https://fbs.com/cabinet','_blank');
-}
-
-function muteOnly(){ document.getElementById('alarmAudio').pause(); alarmPlaying=false; }
-
-// FIXED: REAL PRICE LOGIC - SAME FOR ALL DEVICES
-function checkSignal(){
- if(!soundEnabled) return;
- if(alarmPlaying || timerInt) return;
- if(lastPrices.length<15) return;
-
- let first = lastPrices[0];
- let avg = lastPrices.reduce((a,b)=>a+b)/lastPrices.length;
- let momentum = price - avg;
- let change = price - first;
-
- if(change > 1.0 && momentum > 0.4){
-   showSignal(true);
- }else if(change < -1.0 && momentum < -0.4){
-   showSignal(false);
- }
-}
-
-function showSignal(isBuy){
- let box=document.getElementById('signalBox');
- box.className='big '+(isBuy?'buySig':'sellSig');
- box.innerHTML=(isBuy?'🟢 BUY M15':'🔴 SELL M15')+'<br><span style="font-size:16px">$'+price.toFixed(2)+'</span><br><span style="font-size:11px">15MIN - SAME FOR ALL DEVICES</span>';
- document.getElementById('buyBtn').style.display=isBuy?'block':'none';
- document.getElementById('sellBtn').style.display=!isBuy?'block':'none';
- playAlarm(isBuy);
- let iv=setInterval(()=>{ if(!alarmPlaying){clearInterval(iv);return;} playAlarm(isBuy); },3000);
-}
-
-document.body.addEventListener('click',()=>{ if(!soundEnabled) initAudio(); });
-getLive(); setInterval(getLive,3000); setInterval(checkSignal,4000);
-</script>
-</body>
- </html>
