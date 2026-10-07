@@ -2,502 +2,507 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>NovaTrade AI</title>
+<title>NovaTrade AI MT5 Terminal</title>
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    background:#050b18;
-    color:white;
+    background:#080d14;
+    color:#e7edf5;
     min-height:100vh;
-    overflow-x:hidden;
 }
 
-/* BACKGROUND */
-body:before{
-    content:"";
-    position:fixed;
-    width:350px;
-    height:350px;
-    background:#00e5ff;
-    opacity:.10;
-    filter:blur(100px);
-    border-radius:50%;
-    top:-100px;
-    left:-100px;
-    z-index:-1;
-    animation:moveGlow 7s infinite alternate;
-}
+/* TOP BAR */
 
-body:after{
-    content:"";
-    position:fixed;
-    width:350px;
-    height:350px;
-    background:#7c3cff;
-    opacity:.10;
-    filter:blur(100px);
-    border-radius:50%;
-    right:-100px;
-    bottom:-100px;
-    z-index:-1;
-    animation:moveGlow 9s infinite alternate-reverse;
-}
-
-@keyframes moveGlow{
-    from{transform:translate(0,0)}
-    to{transform:translate(80px,50px)}
-}
-
-/* HEADER */
-header{
+.topbar{
+    height:58px;
+    background:#111820;
+    border-bottom:1px solid #26313d;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 16px;
     position:sticky;
     top:0;
-    z-index:20;
-    padding:18px 5%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(4,12,25,.92);
-    border-bottom:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(15px);
+    z-index:50;
 }
 
 .logo{
-    font-size:23px;
+    font-size:20px;
     font-weight:bold;
 }
 
 .logo span{
-    color:#00e5ff;
+    color:#16c7ff;
 }
 
-.online{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    color:#aab8ca;
-    font-size:13px;
+.server{
+    color:#62e6a5;
+    font-size:12px;
 }
 
-.dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#00ff88;
-    box-shadow:0 0 15px #00ff88;
-    animation:pulse 1.2s infinite;
-}
+/* LAYOUT */
 
-@keyframes pulse{
-    50%{
-        transform:scale(.6);
-        opacity:.4;
-    }
-}
-
-/* CONTAINER */
-.container{
-    width:94%;
-    max-width:1200px;
-    margin:25px auto;
-}
-
-/* HERO */
-.hero{
-    padding:30px;
-    border-radius:24px;
-    background:linear-gradient(
-        135deg,
-        rgba(0,229,255,.12),
-        rgba(124,60,255,.12)
-    );
-    border:1px solid rgba(255,255,255,.09);
-    animation:appear .8s ease;
-}
-
-.hero h1{
-    font-size:clamp(30px,7vw,52px);
-    margin-bottom:12px;
-}
-
-.hero h1 span{
-    color:#00e5ff;
-}
-
-.hero p{
-    color:#a7b5c8;
-    line-height:1.6;
-}
-
-/* CARDS */
-.cards{
+.app{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin:20px 0;
+    grid-template-columns:230px 1fr;
+    min-height:calc(100vh - 58px);
 }
 
-.card{
-    padding:20px;
-    min-height:120px;
-    border-radius:18px;
-    background:rgba(11,25,45,.9);
-    border:1px solid rgba(255,255,255,.08);
-    animation:appear .8s ease;
-    transition:.3s;
+/* SIDEBAR */
+
+.sidebar{
+    background:#0d141c;
+    border-right:1px solid #26313d;
+    padding:15px;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-    border-color:#00e5ff;
-}
-
-.card small{
-    color:#8194ae;
-}
-
-.card h2{
-    margin-top:12px;
-    font-size:25px;
-}
-
-.green{
-    color:#00ff88;
-}
-
-.red{
-    color:#ff5577;
-}
-
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns:1.5fr .8fr;
-    gap:18px;
-}
-
-/* PANEL */
-.panel{
-    background:rgba(11,25,45,.9);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    padding:20px;
-    margin-bottom:18px;
-    animation:appear .8s ease;
-}
-
-.title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-}
-
-.badge{
-    padding:6px 10px;
-    border-radius:20px;
-    background:rgba(0,255,136,.1);
-    color:#00ff88;
+.menu-title{
+    color:#6f8295;
     font-size:11px;
+    margin:15px 8px 8px;
+    text-transform:uppercase;
 }
 
-/* PRICE */
-.pricebox{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:#071322;
-    padding:18px;
-    border-radius:14px;
-    margin-bottom:15px;
+.menu{
+    padding:12px;
+    border-radius:7px;
+    margin-bottom:5px;
+    color:#aab7c5;
+    cursor:pointer;
 }
 
-.price{
-    font-size:27px;
-    font-weight:bold;
+.menu:hover,
+.menu.active{
+    background:#17232e;
+    color:#16c7ff;
 }
 
-.change{
-    color:#00ff88;
-    font-size:13px;
+.account-box{
+    margin-top:25px;
+    padding:14px;
+    background:#111c26;
+    border:1px solid #26313d;
+    border-radius:8px;
 }
 
-/* CHART */
-.chart{
-    height:250px;
-    background:
-        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-    background-size:45px 45px;
-    border-radius:14px;
+.account-box small{
+    color:#718295;
+}
+
+.account-box strong{
+    display:block;
+    margin-top:7px;
+    font-size:18px;
+}
+
+/* MAIN */
+
+.main{
+    padding:12px;
     overflow:hidden;
 }
 
-canvas{
+/* ACCOUNT STRIP */
+
+.account-strip{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+    margin-bottom:10px;
+}
+
+.stat{
+    background:#111820;
+    border:1px solid #26313d;
+    border-radius:7px;
+    padding:12px;
+}
+
+.stat small{
+    display:block;
+    color:#718295;
+    font-size:11px;
+    margin-bottom:7px;
+}
+
+.stat strong{
+    font-size:17px;
+}
+
+.green{
+    color:#42e69b!important;
+}
+
+.red{
+    color:#ff647d!important;
+}
+
+.blue{
+    color:#16c7ff!important;
+}
+
+/* TERMINAL GRID */
+
+.terminal{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 300px;
+    gap:10px;
+}
+
+/* CHART PANEL */
+
+.panel{
+    background:#111820;
+    border:1px solid #26313d;
+    border-radius:7px;
+    overflow:hidden;
+    margin-bottom:10px;
+}
+
+.panel-header{
+    min-height:43px;
+    padding:10px 13px;
+    border-bottom:1px solid #26313d;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.panel-header h3{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.pill{
+    background:#182630;
+    color:#7f93a6;
+    padding:5px 8px;
+    border-radius:4px;
+    font-size:10px;
+}
+
+.live{
+    color:#42e69b;
+}
+
+/* CHART */
+
+.chart-toolbar{
+    display:flex;
+    gap:5px;
+    padding:8px;
+    background:#0d141b;
+    border-bottom:1px solid #202b35;
+}
+
+.time-btn{
+    background:#17212b;
+    color:#8798a9;
+    border:1px solid #26313d;
+    padding:5px 9px;
+    border-radius:4px;
+    font-size:10px;
+}
+
+.time-btn.active{
+    background:#123344;
+    color:#16c7ff;
+}
+
+.chart{
+    height:420px;
+    position:relative;
+    background:
+        linear-gradient(#18222c 1px,transparent 1px),
+        linear-gradient(90deg,#18222c 1px,transparent 1px);
+    background-size:50px 50px;
+}
+
+#candleChart{
     width:100%;
     height:100%;
 }
 
-/* FORM */
+.price-label{
+    position:absolute;
+    right:0;
+    top:45%;
+    background:#16c7ff;
+    color:#00121a;
+    font-size:10px;
+    font-weight:bold;
+    padding:4px 7px;
+}
+
+/* ORDER PANEL */
+
+.order{
+    padding:13px;
+}
+
+.order-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    margin-bottom:14px;
+}
+
+.order-tab{
+    padding:10px;
+    text-align:center;
+    background:#17212b;
+    color:#8596a7;
+    font-size:12px;
+}
+
+.order-tab.active{
+    background:#123344;
+    color:#16c7ff;
+}
+
 label{
     display:block;
-    color:#8395ad;
-    font-size:12px;
-    margin-bottom:6px;
+    color:#778a9d;
+    font-size:10px;
+    margin-bottom:5px;
+    text-transform:uppercase;
 }
 
 select,
 input{
     width:100%;
-    padding:13px;
-    background:#071322;
-    color:white;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:10px;
-    margin-bottom:14px;
+    height:37px;
+    background:#0b1219;
+    color:#e7edf5;
+    border:1px solid #2a3744;
+    border-radius:4px;
+    padding:8px;
+    margin-bottom:12px;
     outline:none;
 }
 
 select:focus,
 input:focus{
-    border-color:#00e5ff;
+    border-color:#16c7ff;
 }
 
-.buttons{
+.trade-buttons{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:10px;
+    gap:7px;
 }
 
-button{
-    border:0;
-    border-radius:10px;
-    padding:14px;
-    color:white;
+.trade-btn{
+    height:48px;
     font-weight:bold;
+    border:0;
+    border-radius:4px;
     cursor:pointer;
-    transition:.25s;
-}
-
-button:hover{
-    transform:translateY(-3px);
-    filter:brightness(1.15);
-}
-
-button:active{
-    transform:scale(.95);
+    font-size:13px;
+    transition:.2s;
 }
 
 .buy{
-    background:linear-gradient(135deg,#00b86b,#00ff88);
-    color:#03130b;
+    background:#087d58;
+    color:white;
+}
+
+.buy:hover{
+    background:#09a873;
 }
 
 .sell{
-    background:linear-gradient(135deg,#ff3159,#ff5577);
+    background:#a52e45;
+    color:white;
 }
 
-/* POSITIONS */
-.position{
-    background:#071322;
-    border-radius:12px;
-    padding:14px;
-    margin-bottom:10px;
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr auto;
-    align-items:center;
-    gap:10px;
-    animation:slide .35s ease;
+.sell:hover{
+    background:#d83e5b;
 }
 
-.position small{
-    display:block;
-    color:#8194ae;
-    margin-bottom:5px;
+/* TABLE */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:11px;
+    min-width:600px;
+}
+
+th{
+    text-align:left;
+    color:#687b8e;
+    font-weight:normal;
+    padding:10px;
+    background:#0d141b;
+    border-bottom:1px solid #26313d;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid #1e2933;
+    color:#b8c4d0;
+}
+
+tr:hover td{
+    background:#151e27;
 }
 
 .close{
-    background:#192b42;
-    color:#ff5577;
-    padding:8px 10px;
-    font-size:11px;
-}
-
-.empty{
-    text-align:center;
-    padding:25px;
-    color:#6f829b;
+    background:#202c38;
+    color:#ff647d;
+    border:1px solid #34424f;
+    padding:5px 9px;
+    border-radius:3px;
+    font-size:10px;
 }
 
 /* ROBOT */
-.robot{
+
+.robot-row{
+    padding:13px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:15px;
-    background:#071322;
-    border-radius:12px;
+}
+
+.robot-info strong{
+    display:block;
+    font-size:12px;
+}
+
+.robot-info small{
+    color:#718295;
+    font-size:10px;
 }
 
 .switch{
-    width:55px;
-    height:30px;
+    width:43px;
+    height:23px;
     border-radius:20px;
-    background:#334155;
+    background:#374451;
     position:relative;
     cursor:pointer;
 }
 
 .switch:after{
     content:"";
-    width:22px;
-    height:22px;
-    background:white;
-    border-radius:50%;
+    width:17px;
+    height:17px;
     position:absolute;
-    top:4px;
-    left:4px;
-    transition:.3s;
+    top:3px;
+    left:3px;
+    background:#fff;
+    border-radius:50%;
+    transition:.25s;
 }
 
 .switch.on{
-    background:#00c875;
-    box-shadow:0 0 20px rgba(0,200,117,.4);
+    background:#087d58;
 }
 
 .switch.on:after{
-    left:29px;
-}
-
-/* MT5 */
-.mt5{
-    padding:15px;
-    background:rgba(0,255,136,.07);
-    border:1px solid rgba(0,255,136,.15);
-    border-radius:12px;
-    color:#00ff88;
-    margin-bottom:12px;
-}
-
-.connect{
-    width:100%;
-    background:linear-gradient(135deg,#0077ff,#00c6ff);
+    left:23px;
 }
 
 /* NOTIFICATION */
-#notice{
+
+#notification{
     position:fixed;
+    right:20px;
     bottom:20px;
-    left:50%;
-    transform:translate(-50%,120px);
-    background:#142942;
-    padding:14px 20px;
-    border-radius:12px;
+    background:#182530;
+    border:1px solid #334555;
+    padding:13px 18px;
+    border-radius:5px;
+    color:#dce6ef;
+    font-size:12px;
+    transform:translateY(100px);
     opacity:0;
-    transition:.4s;
+    transition:.3s;
     z-index:100;
-    text-align:center;
-    width:90%;
-    max-width:400px;
 }
 
-#notice.show{
-    transform:translate(-50%,0);
+#notification.show{
+    transform:translateY(0);
     opacity:1;
 }
 
-/* FOOTER */
-footer{
-    text-align:center;
-    color:#61738b;
-    padding:30px;
-    font-size:12px;
-}
-
-@keyframes appear{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes slide{
-    from{
-        opacity:0;
-        transform:translateX(-15px);
-    }
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-}
-
 /* MOBILE */
+
 @media(max-width:900px){
 
-    .cards{
-        grid-template-columns:1fr 1fr;
+    .app{
+        grid-template-columns:1fr;
     }
 
-    .grid{
+    .sidebar{
+        display:none;
+    }
+
+    .account-strip{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .terminal{
         grid-template-columns:1fr;
+    }
+
+    .chart{
+        height:330px;
     }
 }
 
-@media(max-width:550px){
+@media(max-width:500px){
 
-    header{
-        padding:15px;
+    .topbar{
+        padding:0 10px;
     }
 
     .logo{
-        font-size:19px;
+        font-size:16px;
     }
 
-    .online{
-        font-size:11px;
+    .server{
+        font-size:10px;
     }
 
-    .hero{
-        padding:23px;
+    .main{
+        padding:7px;
     }
 
-    .hero h1{
-        font-size:32px;
+    .account-strip{
+        gap:5px;
     }
 
-    .cards{
-        grid-template-columns:1fr 1fr;
+    .stat{
+        padding:9px;
     }
 
-    .card{
-        min-height:105px;
-        padding:15px;
+    .stat strong{
+        font-size:14px;
     }
 
-    .card h2{
-        font-size:19px;
-    }
-
-    .position{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .close{
-        grid-column:1/-1;
+    .chart{
+        height:280px;
     }
 }
 </style>
@@ -505,188 +510,436 @@ footer{
 
 <body>
 
-<header>
+<!-- TOP BAR -->
 
-<div class="logo">
-Nova<span>Trade</span> AI
-</div>
+<div class="topbar">
 
-<div class="online">
-<div class="dot"></div>
-Demo Online
-</div>
+    <div class="logo">
+        Nova<span>Trade</span> AI
+    </div>
 
-</header>
-
-<div class="container">
-
-<div class="hero">
-
-<h1>
-AI <span>Trading Dashboard</span>
-</h1>
-
-<p>
-Trade Bitcoin in a safe simulated demo environment.
-Watch the market move, open positions and test your strategy.
-</p>
+    <div class="server">
+        ● DEMO SERVER
+    </div>
 
 </div>
 
-<!-- ACCOUNT CARDS -->
+<div class="app">
 
-<div class="cards">
+<!-- SIDEBAR -->
 
-<div class="card">
-<small>Account Balance</small>
-<h2 id="balance">$10,000.00</h2>
-</div>
+<aside class="sidebar">
 
-<div class="card">
-<small>Today's P/L</small>
-<h2 id="profit" class="green">+$0.00</h2>
-</div>
+    <div class="menu-title">Terminal</div>
 
-<div class="card">
-<small>Open Positions</small>
-<h2 id="count">0</h2>
-</div>
+    <div class="menu active">
+        📊 Market Watch
+    </div>
 
-<div class="card">
-<small>Win Rate</small>
-<h2 class="green">78.4%</h2>
-</div>
+    <div class="menu">
+        📈 Trade
+    </div>
 
-</div>
+    <div class="menu">
+        📋 History
+    </div>
 
-<div class="grid">
+    <div class="menu">
+        🤖 AI Robot
+    </div>
 
-<!-- LEFT -->
+    <div class="menu-title">Account</div>
+
+    <div class="account-box">
+        <small>Demo Account</small>
+        <strong>$10,000.00</strong>
+        <small>USD</small>
+    </div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<!-- ACCOUNT STATS -->
+
+<section class="account-strip">
+
+    <div class="stat">
+        <small>BALANCE</small>
+        <strong id="balance">$10,000.00</strong>
+    </div>
+
+    <div class="stat">
+        <small>EQUITY</small>
+        <strong id="equity">$10,000.00</strong>
+    </div>
+
+    <div class="stat">
+        <small>FLOATING P/L</small>
+        <strong id="floating" class="green">
+            +$0.00
+        </strong>
+    </div>
+
+    <div class="stat">
+        <small>USED MARGIN</small>
+        <strong id="margin">$0.00</strong>
+    </div>
+
+    <div class="stat">
+        <small>FREE MARGIN</small>
+        <strong id="freeMargin" class="blue">
+            $10,000.00
+        </strong>
+    </div>
+
+</section>
+
+<div class="terminal">
+
+<!-- LEFT SIDE -->
 
 <div>
 
+<!-- CHART -->
+
 <div class="panel">
 
-<div class="title">
-<h3>BTC/USD Market</h3>
-<span class="badge">LIVE DEMO</span>
+    <div class="panel-header">
+
+        <h3>
+            BTCUSD · Bitcoin / US Dollar
+        </h3>
+
+        <div class="header-right">
+
+            <span class="pill">
+                M1
+            </span>
+
+            <span
+                id="currentPrice"
+                class="pill live">
+                67420.25
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="chart-toolbar">
+
+        <button class="time-btn active">
+            M1
+        </button>
+
+        <button class="time-btn">
+            M5
+        </button>
+
+        <button class="time-btn">
+            M15
+        </button>
+
+        <button class="time-btn">
+            H1
+        </button>
+
+    </div>
+
+    <div class="chart">
+
+        <canvas id="candleChart"></canvas>
+
+        <div
+            id="priceLabel"
+            class="price-label">
+            67420.25
+        </div>
+
+    </div>
+
 </div>
 
-<div class="pricebox">
+<!-- OPEN TRADES -->
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        <h3>
+            Trade
+        </h3>
+
+        <span
+            id="tradeCount"
+            class="pill">
+            0 positions
+        </span>
+
+    </div>
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Ticket</th>
+                    <th>Symbol</th>
+                    <th>Type</th>
+                    <th>Volume</th>
+                    <th>Open Price</th>
+                    <th>SL</th>
+                    <th>TP</th>
+                    <th>Profit</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+            <tbody id="openTrades">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- HISTORY -->
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        <h3>
+            Account History
+        </h3>
+
+        <span class="pill">
+            DEMO
+        </span>
+
+    </div>
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Ticket</th>
+                    <th>Symbol</th>
+                    <th>Type</th>
+                    <th>Volume</th>
+                    <th>Open</th>
+                    <th>Close</th>
+                    <th>Profit</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="history">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- RIGHT SIDE -->
 
 <div>
-<strong>Bitcoin</strong>
-<br>
-<small style="color:#8194ae">
-BTC/USD
-</small>
-</div>
 
-<div style="text-align:right">
-
-<div class="price" id="price">
-$67,420.25
-</div>
-
-<div id="change" class="change">
-+0.00%
-</div>
-
-</div>
-
-</div>
-
-<div class="chart">
-<canvas id="chart"></canvas>
-</div>
-
-</div>
-
-<!-- POSITIONS -->
+<!-- ORDER PANEL -->
 
 <div class="panel">
 
-<div class="title">
+    <div class="panel-header">
 
-<h3>Open Positions</h3>
+        <h3>
+            New Order
+        </h3>
 
-<span class="badge" id="active">
-0 ACTIVE
-</span>
+        <span class="pill">
+            MARKET
+        </span>
+
+    </div>
+
+    <div class="order">
+
+        <div class="order-tabs">
+
+            <div class="order-tab active">
+                Market
+            </div>
+
+            <div class="order-tab">
+                Pending
+            </div>
+
+        </div>
+
+        <label>
+            Symbol
+        </label>
+
+        <select id="symbol">
+
+            <option value="BTCUSD">
+                BTCUSD
+            </option>
+
+            <option value="EURUSD">
+                EURUSD
+            </option>
+
+            <option value="GBPUSD">
+                GBPUSD
+            </option>
+
+            <option value="XAUUSD">
+                XAUUSD
+            </option>
+
+        </select>
+
+        <label>
+            Volume
+        </label>
+
+        <select id="volume">
+
+            <option value="0.01">
+                0.01
+            </option>
+
+            <option value="0.05">
+                0.05
+            </option>
+
+            <option value="0.10">
+                0.10
+            </option>
+
+            <option value="0.50">
+                0.50
+            </option>
+
+            <option value="1.00">
+                1.00
+            </option>
+
+        </select>
+
+        <label>
+            Stop Loss
+        </label>
+
+        <input
+            id="sl"
+            type="number"
+            placeholder="Optional">
+
+        <label>
+            Take Profit
+        </label>
+
+        <input
+            id="tp"
+            type="number"
+            placeholder="Optional">
+
+        <div class="trade-buttons">
+
+            <button
+                class="trade-btn buy"
+                onclick="openTrade('BUY')">
+
+                BUY
+
+            </button>
+
+            <button
+                class="trade-btn sell"
+                onclick="openTrade('SELL')">
+
+                SELL
+
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-<div id="positions">
-
-<div class="empty">
-No positions yet.<br>
-Open a BUY or SELL trade.
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- RIGHT -->
-
-<div>
+<!-- MARKET WATCH -->
 
 <div class="panel">
 
-<div class="title">
+    <div class="panel-header">
 
-<h3>Place Trade</h3>
+        <h3>
+            Market Watch
+        </h3>
 
-<span class="badge">DEMO</span>
+    </div>
 
-</div>
+    <div class="order">
 
-<label>Symbol</label>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #202b35">
 
-<select id="symbol">
-<option>BTC/USD</option>
-<option>EUR/USD</option>
-<option>GBP/USD</option>
-<option>XAU/USD</option>
-</select>
+            <span>BTCUSD</span>
 
-<label>Lot Size</label>
+            <strong id="watchBTC">
+                67420.25
+            </strong>
 
-<select id="lot">
-<option value="0.01">0.01</option>
-<option value="0.05">0.05</option>
-<option value="0.10">0.10</option>
-<option value="0.50">0.50</option>
-<option value="1.00">1.00</option>
-</select>
+        </div>
 
-<label>Stop Loss</label>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #202b35">
 
-<input
-id="sl"
-type="number"
-placeholder="Optional">
+            <span>EURUSD</span>
 
-<label>Take Profit</label>
+            <strong>
+                1.1742
+            </strong>
 
-<input
-id="tp"
-type="number"
-placeholder="Optional">
+        </div>
 
-<div class="buttons">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #202b35">
 
-<button class="buy" onclick="openTrade('BUY')">
-▲ BUY
-</button>
+            <span>GBPUSD</span>
 
-<button class="sell" onclick="openTrade('SELL')">
-▼ SELL
-</button>
+            <strong>
+                1.3458
+            </strong>
 
-</div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;padding:8px 0">
+
+            <span>XAUUSD</span>
+
+            <strong>
+                2654.20
+            </strong>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -694,43 +947,41 @@ placeholder="Optional">
 
 <div class="panel">
 
-<div class="title">
+    <div class="panel-header">
 
-<h3>AI Robot</h3>
+        <h3>
+            NovaTrade AI Robot
+        </h3>
 
-<span class="badge" id="robotStatus">
-OFF
-</span>
+        <span
+            id="robotStatus"
+            class="pill">
+            OFF
+        </span>
 
-</div>
+    </div>
 
-<div class="robot">
+    <div class="robot-row">
 
-<div>
+        <div class="robot-info">
 
-<strong>NovaTrade AI</strong>
+            <strong>
+                Automated Strategy
+            </strong>
 
-<br>
+            <small>
+                Demo trading mode
+            </small>
 
-<small style="color:#8194ae">
-Demo automated strategy
-</small>
+        </div>
 
-</div>
+        <div
+            id="robotSwitch"
+            class="switch"
+            onclick="toggleRobot()">
+        </div>
 
-<div
-class="switch"
-id="robotSwitch"
-onclick="toggleRobot()">
-</div>
-
-</div>
-
-<p
-id="robotText"
-style="color:#8194ae;font-size:12px;margin-top:12px">
-Robot is OFF.
-</p>
+    </div>
 
 </div>
 
@@ -738,50 +989,123 @@ Robot is OFF.
 
 <div class="panel">
 
-<div class="title">
-<h3>MetaTrader 5</h3>
+    <div class="panel-header">
+
+        <h3>
+            MetaTrader 5
+        </h3>
+
+    </div>
+
+    <div class="order">
+
+        <div class="pill live"
+             style="margin-bottom:12px">
+
+            ● DEMO BRIDGE READY
+
+        </div>
+
+        <button
+            class="trade-btn"
+            style="width:100%;background:#1769aa"
+            onclick="connectMT5()">
+
+            CONNECT MT5
+
+        </button>
+
+    </div>
+
 </div>
 
-<div class="mt5">
-● Demo Bridge Interface Ready
-</div>
-
-<button
-class="connect"
-onclick="connectMT5()">
-CONNECT TO MT5
-</button>
-
 </div>
 
 </div>
 
-</div>
+</main>
 
 </div>
 
-<footer>
-NovaTrade AI © 2026 — Demo trading only
-</footer>
-
-<div id="notice"></div>
+<div id="notification"></div>
 
 <script>
 
+/* =================================
+   DEMO ACCOUNT
+================================= */
+
 let balance = 10000;
-let btc = 67420.25;
-let startPrice = btc;
-let positions = [];
-let id = 1;
-let robot = false;
 
-/* NOTIFICATION */
+let floatingProfit = 0;
 
-function notify(text){
+let ticket = 10001;
 
-    const box = document.getElementById("notice");
+let trades = [];
 
-    box.innerText = text;
+let history = [];
+
+let robotOn = false;
+
+
+/* =================================
+   MARKET PRICE
+================================= */
+
+let price = 67420.25;
+
+let candles = [];
+
+let candleOpen = price;
+
+let candleHigh = price;
+
+let candleLow = price;
+
+let candleClose = price;
+
+
+/* =================================
+   CREATE INITIAL CANDLES
+================================= */
+
+for(let i=0;i<55;i++){
+
+    let open =
+        67000 +
+        Math.random()*900;
+
+    let close =
+        open +
+        (Math.random()-0.5)*500;
+
+    let high =
+        Math.max(open,close) +
+        Math.random()*250;
+
+    let low =
+        Math.min(open,close) -
+        Math.random()*250;
+
+    candles.push({
+        open:open,
+        high:high,
+        low:low,
+        close:close
+    });
+}
+
+
+/* =================================
+   NOTIFICATION
+================================= */
+
+function notify(message){
+
+    const box =
+        document.getElementById("notification");
+
+    box.innerText = message;
 
     box.classList.add("show");
 
@@ -792,409 +1116,220 @@ function notify(text){
     },2500);
 }
 
-/* PRICE */
 
-function updatePrice(){
+/* =================================
+   UPDATE MARKET
+================================= */
 
-    btc += (Math.random() - 0.5) * 120;
+function updateMarket(){
 
-    if(btc < 60000){
-        btc = 60000;
+    let movement =
+        (Math.random()-0.5)*80;
+
+    price += movement;
+
+    if(price < 60000){
+        price = 60000;
     }
 
-    document.getElementById("price").innerText =
-        "$" + btc.toLocaleString(
-            "en-US",
-            {
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            }
-        );
+    candleClose = price;
 
-    let percent =
-        ((btc-startPrice)/startPrice)*100;
+    candleHigh =
+        Math.max(candleHigh,price);
 
-    const change =
-        document.getElementById("change");
+    candleLow =
+        Math.min(candleLow,price);
 
-    change.innerText =
-        (percent >= 0 ? "+" : "") +
-        percent.toFixed(2) +
-        "%";
+    if(Math.random() > .70){
 
-    change.className =
-        percent >= 0
-        ? "change"
-        : "change red";
+        candles.push({
+            open:candleOpen,
+            high:candleHigh,
+            low:candleLow,
+            close:candleClose
+        });
 
-    updatePositions();
+        if(candles.length > 60){
+            candles.shift();
+        }
 
-    drawChart();
+        candleOpen = price;
+        candleHigh = price;
+        candleLow = price;
+    }
+
+    updateDisplay();
+
+    drawCandles();
+
 }
 
-/* OPEN TRADE */
+
+/* =================================
+   OPEN TRADE
+================================= */
 
 function openTrade(type){
 
     const symbol =
         document.getElementById("symbol").value;
 
-    const lot =
-        Number(document.getElementById("lot").value);
+    const volume =
+        Number(
+            document.getElementById("volume").value
+        );
+
+    const sl =
+        Number(
+            document.getElementById("sl").value
+        ) || 0;
+
+    const tp =
+        Number(
+            document.getElementById("tp").value
+        ) || 0;
 
     const trade = {
 
-        id:id++,
+        ticket:ticket++,
 
         symbol:symbol,
 
         type:type,
 
-        lot:lot,
+        volume:volume,
 
-        entry:
-        symbol === "BTC/USD"
-        ? btc
-        : 100 + Math.random()*100,
+        openPrice:
+            symbol === "BTCUSD"
+            ? price
+            : 100 + Math.random()*100,
 
-        pnl:0
+        sl:sl,
+
+        tp:tp,
+
+        profit:0,
+
+        time:new Date().toLocaleTimeString()
 
     };
 
-    positions.push(trade);
+    trades.push(trade);
 
-    renderPositions();
+    renderTrades();
 
     notify(
         type +
         " " +
         symbol +
-        " opened successfully"
+        " opened"
     );
 }
 
-/* P/L */
 
-function updatePositions(){
+/* =================================
+   CALCULATE PROFIT
+================================= */
 
-    positions.forEach(function(trade){
+function calculateProfit(trade){
 
-        if(trade.symbol === "BTC/USD"){
+    if(trade.symbol !== "BTCUSD"){
+        return (Math.random()-0.5)*10;
+    }
 
-            let difference =
-                btc-trade.entry;
+    let difference =
+        price-trade.openPrice;
 
-            if(trade.type === "SELL"){
-                difference =
-                    -difference;
-            }
+    if(trade.type === "SELL"){
+        difference = -difference;
+    }
 
-            trade.pnl =
-                difference *
-                trade.lot;
-        }
+    /*
+       DEMO P/L CALCULATION
+    */
+
+    return difference *
+           trade.volume *
+           0.10;
+}
+
+
+/* =================================
+   UPDATE TRADES
+================================= */
+
+function updateTrades(){
+
+    floatingProfit = 0;
+
+    trades.forEach(function(trade){
+
+        trade.profit =
+            calculateProfit(trade);
+
+        floatingProfit +=
+            trade.profit;
 
     });
 
-    renderPositions();
+    updateDisplay();
 
-    let total = 0;
+    renderTrades();
 
-    positions.forEach(function(trade){
-        total += trade.pnl;
+}
+
+
+/* =================================
+   ACCOUNT DISPLAY
+================================= */
+
+function updateDisplay(){
+
+    const equity =
+        balance + floatingProfit;
+
+    let margin = 0;
+
+    trades.forEach(function(trade){
+
+        margin +=
+            trade.volume * 100;
+
     });
 
-    document.getElementById("profit").innerText =
-        (total >= 0 ? "+" : "") +
-        "$" +
-        total.toFixed(2);
+    const freeMargin =
+        equity - margin;
 
-    document.getElementById("profit").className =
-        total >= 0
+    document.getElementById(
+        "balance"
+    ).innerText =
+        money(balance);
+
+    document.getElementById(
+        "equity"
+    ).innerText =
+        money(equity);
+
+    const floating =
+        document.getElementById(
+            "floating"
+        );
+
+    floating.innerText =
+        (floatingProfit >= 0 ? "+" : "") +
+        money(floatingProfit);
+
+    floating.className =
+        floatingProfit >= 0
         ? "green"
         : "red";
-}
 
-/* DISPLAY POSITIONS */
-
-function renderPositions(){
-
-    const box =
-        document.getElementById("positions");
-
-    document.getElementById("count").innerText =
-        positions.length;
-
-    document.getElementById("active").innerText =
-        positions.length + " ACTIVE";
-
-    if(positions.length === 0){
-
-        box.innerHTML =
-        `
-        <div class="empty">
-        No positions yet.<br>
-        Open a BUY or SELL trade.
-        </div>
-        `;
-
-        return;
-    }
-
-    box.innerHTML = "";
-
-    positions.forEach(function(trade){
-
-        const color =
-            trade.pnl >= 0
-            ? "green"
-            : "red";
-
-        const item =
-        document.createElement("div");
-
-        item.className = "position";
-
-        item.innerHTML = `
-
-        <div>
-            <small>Symbol</small>
-            ${trade.symbol}
-        </div>
-
-        <div>
-            <small>Type</small>
-            <span class="${
-                trade.type === "BUY"
-                ? "green"
-                : "red"
-            }">
-            ${trade.type}
-            </span>
-        </div>
-
-        <div>
-            <small>P/L</small>
-            <span class="${color}">
-            ${trade.pnl >= 0 ? "+" : ""}
-            $${trade.pnl.toFixed(2)}
-            </span>
-        </div>
-
-        <button
-        class="close"
-        onclick="closeTrade(${trade.id})">
-        CLOSE
-        </button>
-
-        `;
-
-        box.appendChild(item);
-    });
-}
-
-/* CLOSE */
-
-function closeTrade(id){
-
-    const index =
-        positions.findIndex(
-            function(t){
-                return t.id === id;
-            }
-        );
-
-    if(index === -1){
-        return;
-    }
-
-    const trade =
-        positions[index];
-
-    balance += trade.pnl;
-
-    document.getElementById("balance").innerText =
-        "$" +
-        balance.toLocaleString(
-            "en-US",
-            {
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            }
-        );
-
-    positions.splice(index,1);
-
-    renderPositions();
-
-    notify(
-        "Position closed: " +
-        (trade.pnl >= 0 ? "+" : "") +
-        "$" +
-        trade.pnl.toFixed(2)
-    );
-}
-
-/* ROBOT */
-
-function toggleRobot(){
-
-    robot = !robot;
-
-    const sw =
-        document.getElementById("robotSwitch");
-
-    const status =
-        document.getElementById("robotStatus");
-
-    const text =
-        document.getElementById("robotText");
-
-    if(robot){
-
-        sw.classList.add("on");
-
-        status.innerText = "ON";
-
-        text.innerText =
-            "Robot is active and scanning the demo market.";
-
-        notify("AI Robot activated");
-
-    }else{
-
-        sw.classList.remove("on");
-
-        status.innerText = "OFF";
-
-        text.innerText =
-            "Robot is OFF.";
-
-        notify("AI Robot stopped");
-    }
-}
-
-/* ROBOT DEMO */
-
-setInterval(function(){
-
-    if(!robot){
-        return;
-    }
-
-    if(positions.length >= 3){
-        return;
-    }
-
-    const type =
-        Math.random() > .5
-        ? "BUY"
-        : "SELL";
-
-    openTrade(type);
-
-},7000);
-
-/* MT5 */
-
-function connectMT5(){
-
-    notify(
-        "MT5 bridge ready. Real execution requires a secure MT5 EA/backend."
-    );
-}
-
-/* CHART */
-
-const canvas =
-    document.getElementById("chart");
-
-const ctx =
-    canvas.getContext("2d");
-
-let data = [];
-
-for(let i=0;i<60;i++){
-
-    data.push(
-        80 + Math.random()*120
-    );
-}
-
-function resize(){
-
-    canvas.width =
-        canvas.parentElement.clientWidth;
-
-    canvas.height =
-        canvas.parentElement.clientHeight;
-
-    drawChart();
-}
-
-function drawChart(){
-
-    if(!canvas.width){
-        return;
-    }
-
-    data.push(
-        80 + Math.random()*120
-    );
-
-    if(data.length>70){
-        data.shift();
-    }
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    ctx.beginPath();
-
-    data.forEach(function(value,index){
-
-        const x =
-            index *
-            canvas.width /
-            (data.length-1);
-
-        const y =
-            canvas.height-value;
-
-        if(index===0){
-            ctx.moveTo(x,y);
-        }else{
-            ctx.lineTo(x,y);
-        }
-    });
-
-    ctx.strokeStyle =
-        "#00e5ff";
-
-    ctx.lineWidth = 2;
-
-    ctx.stroke();
-}
-
-window.addEventListener(
-    "resize",
-    resize
-);
-
-resize();
-
-renderPositions();
-
-setInterval(
-    updatePrice,
-    2000
-);
-
-</script>
-
-</body>
-    </html>
+    document.getElementById(
+        "margin"
+    ).innerText =
+        money(margin);
+
+    document.getElementById(
+        "freeMargin"
+    ).innerText =
+        money(f
