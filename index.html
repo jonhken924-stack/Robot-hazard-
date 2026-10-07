@@ -1,950 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA TRADE AI</title>
-
+<title>NOVA GOLD - ALARM SIGNAL</title>
 <style>
-*{box-sizing:border-box}
-
-body{
-    margin:0;
-    background:#06101c;
-    color:#fff;
-    font-family:Arial,sans-serif;
-}
-
-header{
-    background:#0b1929;
-    padding:18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #243c55;
-}
-
-.logo{
-    color:#20e6a2;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.status{
-    color:#20e6a2;
-    font-size:13px;
-}
-
-main{
-    width:94%;
-    max-width:1100px;
-    margin:20px auto;
-}
-
-.hero{
-    background:linear-gradient(135deg,#102a43,#091523);
-    padding:25px;
-    border-radius:18px;
-    border:1px solid #29435d;
-    margin-bottom:18px;
-}
-
-.hero h1{
-    margin:0 0 10px;
-    font-size:30px;
-}
-
-.hero p{
-    margin:0;
-    color:#9eb0c4;
-    line-height:1.6;
-}
-
-.tag{
-    display:inline-block;
-    margin-top:15px;
-    padding:7px 10px;
-    border-radius:7px;
-    background:#12392f;
-    color:#20e6a2;
-    font-size:11px;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-bottom:18px;
-}
-
-.card{
-    background:#0c1a2b;
-    border:1px solid #203750;
-    border-radius:14px;
-    padding:16px;
-}
-
-.card span{
-    color:#8297ad;
-    font-size:12px;
-}
-
-.card strong{
-    display:block;
-    margin-top:8px;
-    font-size:22px;
-}
-
-.green{color:#20e6a2}
-.red{color:#ff5570}
-
-.grid{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:18px;
-}
-
-.box{
-    background:#0c1a2b;
-    border:1px solid #203750;
-    border-radius:16px;
-    padding:18px;
-    margin-bottom:18px;
-}
-
-.box h2{
-    margin:0 0 15px;
-    font-size:19px;
-}
-
-#chart{
-    width:100%;
-    height:330px;
-    background:#07111d;
-    border-radius:10px;
-    display:block;
-}
-
-button{
-    width:100%;
-    border:0;
-    border-radius:10px;
-    padding:15px;
-    margin-top:10px;
-    font-weight:bold;
-    font-size:15px;
-    cursor:pointer;
-}
-
-.run{
-    background:#20e6a2;
-    color:#03110b;
-}
-
-.stop{
-    background:#ff5570;
-    color:#fff;
-}
-
-.reset{
-    background:#263a50;
-    color:#fff;
-}
-
-.row{
-    display:flex;
-    justify-content:space-between;
-    padding:11px 0;
-    border-bottom:1px solid #1e3044;
-}
-
-.row:last-child{
-    border-bottom:0;
-}
-
-.analysis{
-    background:#07111d;
-    padding:14px;
-    border-radius:10px;
-    margin-top:12px;
-}
-
-.signal{
-    font-size:19px;
-    font-weight:bold;
-    margin-bottom:6px;
-}
-
-.muted{
-    color:#8297ad;
-    font-size:13px;
-}
-
-.progress{
-    height:12px;
-    background:#18283a;
-    border-radius:20px;
-    margin-top:15px;
-    overflow:hidden;
-}
-
-.bar{
-    width:0%;
-    height:100%;
-    background:#20e6a2;
-}
-
-.history{
-    max-height:220px;
-    overflow:auto;
-}
-
-.trade{
-    display:flex;
-    justify-content:space-between;
-    padding:10px;
-    border-bottom:1px solid #1e3044;
-}
-
-.badge{
-    padding:4px 7px;
-    border-radius:5px;
-    background:#123f70;
-    font-size:11px;
-}
-
-footer{
-    text-align:center;
-    color:#65788e;
-    font-size:11px;
-    padding:25px;
-}
-
-@media(max-width:800px){
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:500px){
-
-    .hero h1{
-        font-size:25px;
-    }
-
-    #chart{
-        height:280px;
-    }
-}
+*{box-sizing:border-box;margin:0}body{background:#040d19;color:#fff;font-family:Arial;padding:10px}
+.card{background:#10233d;border:1px solid #1d3e62;border-radius:14px;padding:14px;margin-bottom:10px}
+.big{font-size:38px;font-weight:900;text-align:center;padding:24px;border-radius:14px;margin:10px 0;cursor:pointer}
+.buy{background:linear-gradient(90deg,#00b67a,#00ffaa);color:#002a18;animation:flash 0.5s infinite}
+.sell{background:linear-gradient(90deg,#d83a5a,#ff5c7a);color:#fff;animation:flash 0.5s infinite}
+.wait{background:#162c44;color:#7d93a8}
+@keyframes flash{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+.btn{width:100%;padding:18px;border:0;border-radius:12px;font-weight:900;font-size:18px;margin-top:10px}
+.btn-fbs{background:#ffcc00;color:#000}
+.btn-stop{background:#d83a5a;color:#fff;display:none}
+.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1a3450;font-size:13px}
+.switch{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
 </style>
 </head>
-
 <body>
-
-<header>
-    <div class="logo">NOVA TRADE AI</div>
-    <div class="status" id="status">● MARKET LIVE</div>
-</header>
-
-<main>
-
-<div class="hero">
-    <h1>AI Bullish Market Scanner</h1>
-    <p>
-        Automatic market analysis dashboard. The system continuously
-        studies price movement and searches for bullish BUY setups.
-    </p>
-    <div class="tag">REAL• AUTOMATIC ANALYSIS • BUY MODE</div>
+<div class="card" style="text-align:center">
+<b>NOVA GOLD AI - ALARM</b><br><span style="color:#00ffaa">● FBS-Demo 106742043</span><br>
+<span style="font-size:22px;font-weight:800;color:#ffcc00" id="livePrice">Connecting $4119...</span>
 </div>
 
-<div class="stats">
+<div id="signalBox" class="big wait" onclick="stopAlarm()">🔍 SCANNING<br><span style="font-size:14px">Tap to enable sound</span></div>
+
+<button id="stopBtn" class="btn btn-stop" onclick="stopAlarm()">🔇 STOP ALARM & OPEN FBS</button>
+<button class="btn btn-fbs" onclick="openFBS()">OPEN FBS APP</button>
 
 <div class="card">
-<span>Balance</span>
-<strong id="balance">$100.00</strong>
+<div class="switch"><span>🔊 Loud Alarm</span><b style="color:#00ffaa" id="alarmState">ON</b></div>
+<div class="switch"><span>📳 Vibration</span><b style="color:#00ffaa">ON</b></div>
+<div class="row"><span>Account</span><b>106742043 Demo $1000</b></div>
+<div class="row"><span>Target</span><b style="color:#00ffaa">+$10/day</b></div>
+<div class="row"><span>Price</span><b id="priceRow">$4119 LIVE</b></div>
 </div>
 
-<div class="card">
-<span>Equity</span>
-<strong id="equity">$100.00</strong>
-</div>
-
-<div class="card">
-<span>Today's P/L</span>
-<strong id="profit" class="green">$0.00</strong>
-</div>
-
-<div class="card">
-<span>XAUUSD</span>
-<strong id="price">$2650.00</strong>
-</div>
-
-</div>
-
-
-<div class="grid">
-
-<div>
-
-<div class="box">
-
-<h2>XAUUSD AI Market</h2>
-
-<canvas id="chart"></canvas>
-
-<div class="analysis">
-
-<div class="muted">AI ANALYSIS</div>
-
-<div id="signal" class="signal green">
-SCANNING...
-</div>
-
-<div id="reason" class="muted">
-The robot is watching the market automatically.
-</div>
-
-</div>
-
-<button class="run" id="run">
-▶ RUN ROBOT
-</button>
-
-<button class="stop" id="stop">
-■ STOP ROBOT
-</button>
-
-<button class="reset" id="reset">
-↻ RESTART 
-</button>
-
-</div>
-
-
-<div class="box">
-
-<h2>Current Trade</h2>
-
-<div class="row">
-<span>Direction</span>
-<strong id="direction">NONE</strong>
-</div>
-
-<div class="row">
-<span>Entry</span>
-<strong id="entry">-</strong>
-</div>
-
-<div class="row">
-<span>Current</span>
-<strong id="current">-</strong>
-</div>
-
-<div class="row">
-<span>Stop Loss</span>
-<strong id="sl">-</strong>
-</div>
-
-<div class="row">
-<span>Take Profit</span>
-<strong id="tp">-</strong>
-</div>
-
-<div class="row">
-<span>Floating P/L</span>
-<strong id="floating">$0.00</strong>
-</div>
-
-</div>
-
-
-<div class="box">
-
-<h2>Trade History</h2>
-
-<div id="history" class="history">
-
-<div class="trade">
-<span>Waiting for trades</span>
-<span>—</span>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div>
-
-<div class="box">
-
-<h2>AI Risk Control</h2>
-
-<div class="row">
-<span>Daily Target</span>
-<strong class="green">+$10</strong>
-</div>
-
-<div class="row">
-<span>Max Daily Loss</span>
-<strong class="red">-$5</strong>
-</div>
-
-<div class="row">
-<span>Risk / Trade</span>
-<strong>1%</strong>
-</div>
-
-<div class="row">
-<span>Reward / Risk</span>
-<strong>2:1</strong>
-</div>
-
-<div class="progress">
-<div id="bar" class="bar"></div>
-</div>
-
-<p id="target" class="muted">
-$0.00 / $10.00
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h2>Robot</h2>
-
-<div class="row">
-<span>Status</span>
-<strong id="robot">READY</strong>
-</div>
-
-<div class="row">
-<span>Market</span>
-<strong>XAUUSD</strong>
-</div>
-
-<div class="row">
-<span>Analysis</span>
-<strong>AUTOMATIC</strong>
-</div>
-
-<div class="row">
-<span>Direction</span>
-<strong class="green">BUY ONLY</strong>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</main>
-
-<footer>
-NOVA TRADE AI<br>
-Real simulation only — real trading involves risk and profits are  guaranteed.
-</footer>
-
+<audio id="alarmAudio" loop preload="auto">
+<source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg">
+<source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+</audio>
 
 <script>
+let price=4119.10, alarmOn=true, alarmPlaying=false, audioCtx=null;
+const alarmEl=document.getElementById('alarmAudio');
 
-var canvas=document.getElementById("chart");
-var ctx=canvas.getContext("2d");
+function initAudio(){ if(!audioCtx){ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); } }
 
-var price=2650;
-var balance=100;
-var profit=0;
-
-var running=false;
-var position=null;
-
-var candles=[];
-var trades=[];
-
-var target=10;
-var maxLoss=5;
-
-
-function resize(){
-
-    canvas.width=canvas.clientWidth;
-    canvas.height=canvas.clientHeight;
-
-    draw();
-
+async function getLive(){
+ try{let r=await fetch('https://api.gold-api.com/price/XAU');let j=await r.json();if(j.price)price=j.price;}catch(e){price+=(Math.random()-0.5)*1.2;}
+ document.getElementById('livePrice').innerText='$'+price.toFixed(2)+' LIVE';
+ document.getElementById('priceRow').innerText='$'+price.toFixed(2)+' LIVE';
 }
 
-
-window.addEventListener("resize",resize);
-
-
-function newCandle(){
-
-    var open=price;
-
-    var move=(Math.random()-0.47)*6;
-
-    var close=open+move;
-
-    var high=Math.max(open,close)+Math.random()*4;
-
-    var low=Math.min(open,close)-Math.random()*4;
-
-    price=close;
-
-    candles.push({
-        open:open,
-        close:close,
-        high:high,
-        low:low
-    });
-
-    if(candles.length>45){
-        candles.shift();
-    }
-
+function playAlarm(isBuy){
+ if(!alarmOn) return;
+ initAudio();
+ alarmPlaying=true;
+ document.getElementById('stopBtn').style.display='block';
+ // Try HTML audio
+ alarmEl.currentTime=0; alarmEl.play().catch(()=>{});
+ // Loud beep via Web Audio
+ try{
+   let osc=audioCtx.createOscillator(); let gain=audioCtx.createGain();
+   osc.type='square'; osc.frequency.value=isBuy?880:440;
+   gain.gain.value=0.5; osc.connect(gain); gain.connect(audioCtx.destination);
+   osc.start(); setTimeout(()=>{try{osc.stop()}catch(e){}},600);
+ }catch(e){}
+ // Vibrate
+ if(navigator.vibrate) navigator.vibrate([300,100,300,100,500]);
 }
 
-
-for(var i=0;i<45;i++){
-    newCandle();
+function stopAlarm(){
+ alarmPlaying=false;
+ alarmEl.pause(); alarmEl.currentTime=0;
+ document.getElementById('stopBtn').style.display='none';
+ if(navigator.vibrate) navigator.vibrate(0);
+ openFBS();
 }
 
-
-function draw(){
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    if(candles.length===0){
-        return;
-    }
-
-    var highs=candles.map(function(c){
-        return c.high;
-    });
-
-    var lows=candles.map(function(c){
-        return c.low;
-    });
-
-    var max=Math.max.apply(null,highs);
-    var min=Math.min.apply(null,lows);
-
-    var range=max-min;
-
-    if(range===0){
-        range=1;
-    }
-
-    var width=canvas.width/candles.length;
-
-    function Y(value){
-
-        return canvas.height-
-        ((value-min)/range)*
-        (canvas.height-30)-15;
-
-    }
-
-    candles.forEach(function(c,i){
-
-        var x=i*width+width/2;
-
-        var bullish=c.close>=c.open;
-
-        ctx.strokeStyle=
-        bullish ? "#20e6a2" : "#ff5570";
-
-        ctx.fillStyle=
-        bullish ? "#20e6a2" : "#ff5570";
-
-        ctx.beginPath();
-
-        ctx.moveTo(x,Y(c.high));
-        ctx.lineTo(x,Y(c.low));
-
-        ctx.stroke();
-
-        var top=Math.min(
-            Y(c.open),
-            Y(c.close)
-        );
-
-        var height=Math.abs(
-            Y(c.open)-Y(c.close)
-        );
-
-        if(height<2){
-            height=2;
-        }
-
-        ctx.fillRect(
-            x-width*0.3,
-            top,
-            width*0.6,
-            height
-        );
-
-    });
-
+function checkSignal(){
+ if(alarmPlaying) return; // don't spam while alarm ringing
+ if(Math.random()>0.82){
+   let isBuy=Math.random()>0.5;
+   let box=document.getElementById('signalBox');
+   if(isBuy){
+     box.className='big buy';box.innerHTML='🟢 BUY SIGNAL<br><span style="font-size:18px">XAUUSD @ $'+price.toFixed(2)+'</span><br><span style="font-size:12px">TAP TO STOP ALARM</span>';
+   }else{
+     box.className='big sell';box.innerHTML='🔴 SELL SIGNAL<br><span style="font-size:18px">XAUUSD @ $'+price.toFixed(2)+'</span><br><span style="font-size:12px">TAP TO STOP ALARM</span>';
+   }
+   playAlarm(isBuy);
+   // Keep alarming every 2 sec until stopped
+   let interval=setInterval(()=>{
+     if(!alarmPlaying){clearInterval(interval);return;}
+     playAlarm(isBuy);
+   },2000);
+ }
 }
 
+function openFBS(){ window.open('https://fbs.com/cabinet','_blank'); }
 
-function analyze(){
+// Enable audio on first tap
+document.body.addEventListener('click',()=>{initAudio(); if(audioCtx && audioCtx.state==='suspended')audioCtx.resume();},{once:true});
 
-    if(candles.length<8){
-        return false;
-    }
-
-    var recent=candles.slice(-8);
-
-    var bullish=0;
-
-    for(var i=0;i<recent.length;i++){
-
-        if(recent[i].close>recent[i].open){
-            bullish++;
-        }
-
-    }
-
-    var rising=
-    recent[recent.length-1].close>
-    recent[0].close;
-
-    var strong=
-    recent[recent.length-1].close>
-    recent[recent.length-3].close;
-
-    if(bullish>=5 && rising && strong){
-
-        document.getElementById("signal")
-        .textContent="🟢 BULLISH MARKET";
-
-        document.getElementById("reason")
-        .textContent=
-        "Bullish momentum detected. Robot is searching for a BUY entry.";
-
-        return true;
-
-    }
-
-    document.getElementById("signal")
-    .textContent="🟡 WAITING";
-
-    document.getElementById("reason")
-    .textContent=
-    "Market is not sufficiently bullish. Robot is waiting.";
-
-    return false;
-
-}
-
-
-function buy(){
-
-    if(position!==null){
-        return;
-    }
-
-    if(profit>=target){
-        return;
-    }
-
-    if(profit<=-maxLoss){
-        return;
-    }
-
-    var distance=3;
-
-    position={
-        entry:price,
-        sl:price-distance,
-        tp:price+(distance*2),
-        size:1/3
-    };
-
-}
-
-
-function closeTrade(win){
-
-    if(position===null){
-        return;
-    }
-
-    var amount;
-
-    if(win){
-        amount=2;
-    }else{
-        amount=-1;
-    }
-
-    balance+=amount;
-    profit+=amount;
-
-    trades.unshift({
-        result:win ? "TAKE PROFIT" : "STOP LOSS",
-        amount:amount
-    });
-
-    position=null;
-
-    showTrades();
-
-}
-
-
-function check(){
-
-    if(position===null){
-        return;
-    }
-
-    if(price<=position.sl){
-
-        closeTrade(false);
-
-    }else if(price>=position.tp){
-
-        closeTrade(true);
-
-    }
-
-}
-
-
-function showTrades(){
-
-    var box=document.getElementById("history");
-
-    box.innerHTML="";
-
-    if(trades.length===0){
-
-        box.innerHTML=
-        '<div class="trade">'+
-        '<span>Waiting for trades</span>'+
-        '<span>—</span>'+
-        '</div>';
-
-        return;
-
-    }
-
-    trades.slice(0,10).forEach(function(t){
-
-        var div=document.createElement("div");
-
-        div.className="trade";
-
-        div.innerHTML=
-        '<span>'+
-        '<span class="badge">BUY</span> '+
-        t.result+
-        '</span>'+
-        '<strong class="'+
-        (t.amount>=0 ? "green":"red")+
-        '">'+
-        (t.amount>=0?"+":"")+
-        "$"+t.amount.toFixed(2)+
-        '</strong>';
-
-        box.appendChild(div);
-
-    });
-
-}
-
-
-function update(){
-
-    var floating=0;
-
-    if(position!==null){
-
-        floating=
-        (price-position.entry)*
-        position.size;
-
-    }
-
-    document.getElementById("balance")
-    .textContent="$"+balance.toFixed(2);
-
-    document.getElementById("equity")
-    .textContent=
-    "$"+(balance+floating).toFixed(2);
-
-    var profitBox=
-    document.getElementById("profit");
-
-    profitBox.textContent=
-    (profit>=0?"+":"")+
-    "$"+profit.toFixed(2);
-
-    profitBox.className=
-    profit>=0 ? "green":"red";
-
-    document.getElementById("price")
-    .textContent="$"+price.toFixed(2);
-
-    document.getElementById("floating")
-    .textContent=
-    (floating>=0?"+":"")+
-    "$"+floating.toFixed(2);
-
-    var percentage=
-    Math.max(
-        0,
-        Math.min(100,(profit/target)*100)
-    );
-
-    document.getElementById("bar")
-    .style.width=percentage+"%";
-
-    document.getElementById("target")
-    .textContent=
-    "$"+profit.toFixed(2)+" / $10.00";
-
-
-    if(position!==null){
-
-        document.getElementById("direction")
-        .textContent="BUY";
-
-        document.getElementById("entry")
-        .textContent=position.entry.toFixed(2);
-
-        document.getElementById("current")
-        .textContent=price.toFixed(2);
-
-        document.getElementById("sl")
-        .textContent=position.sl.toFixed(2);
-
-        document.getElementById("tp")
-        .textContent=position.tp.toFixed(2);
-
-    }else{
-
-        document.getElementById("direction")
-        .textContent="NONE";
-
-        document.getElementById("entry").textContent="-";
-        document.getElementById("current").textContent="-";
-        document.getElementById("sl").textContent="-";
-        document.getElementById("tp").textContent="-";
-
-    }
-
-}
-
-
-document.getElementById("run")
-.addEventListener("click",function(){
-
-    running=true;
-
-    document.getElementById("status")
-    .textContent="● ROBOT RUNNING";
-
-    document.getElementById("robot")
-    .textContent="ANALYZING";
-
-});
-
-
-document.getElementById("stop")
-.addEventListener("click",function(){
-
-    running=false;
-
-    document.getElementById("status")
-    .textContent="● ROBOT STOPPED";
-
-    document.getElementById("robot")
-    .textContent="STOPPED";
-
-});
-
-
-document.getElementById("reset")
-.addEventListener("click",function(){
-
-    price=2650;
-    balance=100;
-    profit=0;
-    running=false;
-    position=null;
-    candles=[];
-    trades=[];
-
-    for(var i=0;i<45;i++){
-        newCandle();
-    }
-
-    document.getElementById("status")
-    .textContent="● MARKET LIVE";
-
-    document.getElementById("robot")
-    .textContent="READY";
-
-    showTrades();
-    update();
-    draw();
-
-});
-
-
-setInterval(function(){
-
-    newCandle();
-
-    draw();
-
-    check();
-
-    if(running){
-
-        var bullish=analyze();
-
-        if(
-            bullish &&
-            position===null &&
-            profit<target &&
-            profit>-maxLoss
-        ){
-
-            buy();
-
-        }
-
-    }else{
-
-        analyze();
-
-    }
-
-    update();
-
-},1000);
-
-
-resize();
-update();
-
+getLive();setInterval(getLive,3000);
+setInterval(checkSignal,4000);
 </script>
-
 </body>
-  </html>
+                                         </html>
